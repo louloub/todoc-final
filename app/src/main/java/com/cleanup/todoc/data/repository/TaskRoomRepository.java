@@ -32,6 +32,12 @@ public class TaskRoomRepository implements TaskRepository {
         new InsertAsyncTask(mTaskDao).execute(task);
     }
 
+    @Override
+    public void deleteTask(long taskId) {
+
+        mTaskDao.deleteTask(taskId);
+    }
+
     private static class InsertAsyncTask extends AsyncTask<Task, Void, Void> {
 
         private TaskDao mAsyncTaskDao;

@@ -178,6 +178,8 @@ public class TaskViewModel extends ViewModel {
         tasksModelUi.getTaskCellModels().remove(task);
 
         mTaskModelUiMediatorLiveData.setValue(tasksModelUi);
+
+        mTaskRepository.deleteTask(task.getId());
     }
 
     private TasksModelUi getTasksModelUi() {
