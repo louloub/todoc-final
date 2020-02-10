@@ -20,6 +20,7 @@ import com.cleanup.todoc.model.TasksModelUi;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import static com.cleanup.todoc.ui.viewmodel.SortMethod.ALPHABETICAL;
@@ -112,9 +113,10 @@ public class TaskViewModel extends ViewModel {
         for (Task task : taskList) {
             for (Project project : projectList) {
                 if (project.getId() == task.getProjectId()) {
-                    // TODO LOULOUB UTILISER LE roject.getId() POUR METTRE LA COULEUR
 
-                    taskCellModels.add(new TaskCellModelUi(task.getId(), project.getId(), task.getMessage(), 0));
+                    // TODO LOULOUB UTILISER LE project.getId() POUR METTRE LA COULEUR
+
+                    taskCellModels.add(new TaskCellModelUi(task.getId(), project.getId(), task.getMessage(), task.getCreationTimestamp()));
                 }
             }
         }
@@ -165,7 +167,7 @@ public class TaskViewModel extends ViewModel {
 
             Task task = new Task(
                 projectModelUi.getId(),
-                taskName
+                taskName, new Date().getTime()
             );
 
             mTaskRepository.addTask(task);

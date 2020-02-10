@@ -22,9 +22,16 @@ public class Task {
 
     private String message;
 
-    public Task(int projectId, String message) {
+    private long creationTimestamp;
+
+    public Task(int projectId, String message, long creationTimestamp) {
         this.projectId = projectId;
         this.message = message;
+        this.creationTimestamp = creationTimestamp;
+    }
+
+    public long getCreationTimestamp() {
+        return creationTimestamp;
     }
 
     public int getId() {
@@ -42,9 +49,5 @@ public class Task {
     @VisibleForTesting
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 }

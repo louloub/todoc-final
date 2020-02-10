@@ -21,10 +21,6 @@ interface TaskDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     long insertTask(Task task);
 
-    // TODO LOULOUB AJOUTER LA SUPPRESSION
-    /*@Query("DELETE FROM Task")
-    void deleteTask(Task task);*/
-
     @Query("DELETE FROM Task WHERE id = :taskId")
     void deleteTask(long taskId);
 }
