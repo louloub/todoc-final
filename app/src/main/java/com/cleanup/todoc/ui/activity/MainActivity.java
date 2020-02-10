@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cleanup.todoc.R;
 import com.cleanup.todoc.ViewModelFactory;
+import com.cleanup.todoc.data.repository.ProjectRoomRepository;
 import com.cleanup.todoc.model.ProjectModelUi;
 import com.cleanup.todoc.model.TaskCellModelUi;
 import com.cleanup.todoc.model.TasksModelUi;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     TaskViewModel mTaskViewModel;
 
     private final ProjectModelUi[] mAllProjects = ProjectModelUi.getAllProjects();
+
+    // private final ProjectModelUi[] mAllProjects = mTaskViewModel.getAllProjects();
 
     private final TasksAdapter mTaskAdapter = new TasksAdapter(this);
 

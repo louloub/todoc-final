@@ -196,6 +196,14 @@ public class TaskViewModel extends ViewModel {
         return taskModelUi;
     }
 
+    /*public ProjectModelUi[] getAllProjects() {
+        return new ProjectModelUi[]{
+                new ProjectModelUi(1, "Projet Tartampion", 0xFFEADAD1),
+                new ProjectModelUi(2, "Projet Lucidia", 0xFFB4CDBA),
+                new ProjectModelUi(3, "Projet Circus", 0xFFA3CED2),
+        };
+    }*/
+
     public void setSortMethod(SortMethod sortMethod) {
         mSortMethodLiveData.setValue(sortMethod);
     }

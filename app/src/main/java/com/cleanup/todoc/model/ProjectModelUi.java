@@ -4,6 +4,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.cleanup.todoc.data.repository.ProjectRoomRepository;
+
 /**
  * <p>Models for project in which tasks are included.</p>
  *
@@ -34,7 +36,7 @@ public class ProjectModelUi {
      * @param name  the name of the project to set
      * @param color the hex (ARGB) code of the color associated to the project to set
      */
-    private ProjectModelUi(int id, @NonNull String name, @ColorInt int color) {
+    public ProjectModelUi(int id, @NonNull String name, @ColorInt int color) {
         this.id = id;
         this.name = name;
         this.color = color;
