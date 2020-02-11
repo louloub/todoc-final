@@ -59,7 +59,8 @@ public class ProjectModelUi {
         }
         return null;
     }
-*/
+    */
+
     /**
      * Returns the unique identifier of the project.
      *

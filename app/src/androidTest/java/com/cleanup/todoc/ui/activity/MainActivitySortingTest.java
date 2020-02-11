@@ -245,8 +245,6 @@ public class MainActivitySortingTest {
                         isDisplayed()));
         appCompatEditText.perform(replaceText(nomDeLaTache), closeSoftKeyboard());
 
-        // TODO : error ici
-
         /*onData(allOf(is(instanceOf(String.class)), is(project)))
                 .perform(click());
         onView(withId(R.id.project_spinner))

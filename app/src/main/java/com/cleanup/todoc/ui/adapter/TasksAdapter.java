@@ -148,15 +148,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
             lblTaskName.setText(task.getName());
             imgDelete.setTag(task);
             lblProjectName.setText(task.getProjectName());
-
-            // imgProject.setBackgroundColor(task.getColor());
-
             imgProject.setSupportImageTintList(ColorStateList.valueOf(task.getColor()));
-
-
-            // imgProject.setSupportImageTintList(ColorStateList.valueOf(task.getColor()));
-            // imgProject.setBackgroundColor(6579455);
-            // imgProject.setSupportImageTintList(ColorStateList.valueOf(6579455));
 
             /*// TODO LOULOUB A VIRER
             final ProjectModelUi taskProject = task.getProject();

@@ -23,7 +23,11 @@ public class TaskCellModelUi {
     private String projectName;
 
     // TODO LOULOUB IL MANQUE LA COULEUR (EN COLOR INT OU COLOR RES, QU'IMPORTE)
+    /**
+     * The color of the task
+     */
     private int color;
+
     /**
      * The name of the task
      */
@@ -59,10 +63,19 @@ public class TaskCellModelUi {
         this.setColor(color);
     }
 
+    /**
+     * Returns the color of the task.
+     *
+     * @return the color of the task
+     */
     public int getColor() {
         return color;
     }
 
+    /**
+     * Set the color of the task.
+     *
+     */
     public void setColor(int color) {
         this.color = color;
     }
@@ -102,17 +115,6 @@ public class TaskCellModelUi {
     public String getProjectName() {
         return projectName;
     }
-
-    /**
-     * Returns the project associated to the task.
-     *
-     * @return the project associated to the task
-     */
-    /*@Nullable
-    public ProjectModelUi getProject() {
-
-        return ProjectModelUi.getProjectById(projectName);
-    }*/
 
     /**
      * Returns the name of the task.

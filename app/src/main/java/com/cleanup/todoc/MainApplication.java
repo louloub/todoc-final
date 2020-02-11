@@ -3,6 +3,8 @@ package com.cleanup.todoc;
 import android.app.Application;
 import android.database.Cursor;
 
+import androidx.core.content.ContextCompat;
+
 import com.cleanup.todoc.data.dao.ProjectDao;
 import com.cleanup.todoc.data.dataBase.AppDatabase;
 import com.cleanup.todoc.data.model.Project;
@@ -29,9 +31,9 @@ public class MainApplication extends Application {
 
     public static ProjectModelUi[] getAllProjects() {
         return new ProjectModelUi[]{
-                new ProjectModelUi(1, "Projet Tartampion", 0xFFEADAD1),
-                new ProjectModelUi(2, "Projet Lucidia", 0xFFB4CDBA),
-                new ProjectModelUi(3, "Projet Circus", 0xFFA3CED2),
+                new ProjectModelUi(1, "Projet Tartampion", ContextCompat.getColor(MainApplication.getInstance(), R.color.project_tartampion)),
+                new ProjectModelUi(2, "Projet Lucidia", ContextCompat.getColor(MainApplication.getInstance(), R.color.project_lucidia)),
+                new ProjectModelUi(3, "Projet Circus", ContextCompat.getColor(MainApplication.getInstance(), R.color.project_circus)),
         };
     }
 
