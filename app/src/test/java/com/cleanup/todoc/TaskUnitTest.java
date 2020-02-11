@@ -20,22 +20,20 @@ import static org.junit.Assert.assertSame;
 public class TaskUnitTest {
     @Test
     public void test_projects() {
-        final TaskCellModelUi task1 = new TaskCellModelUi(1, 1, "task 1", new Date().getTime());
-        final TaskCellModelUi task2 = new TaskCellModelUi(2, 2, "task 2", new Date().getTime());
-        final TaskCellModelUi task3 = new TaskCellModelUi(3, 3, "task 3", new Date().getTime());
-        final TaskCellModelUi task4 = new TaskCellModelUi(4, 4, "task 4", new Date().getTime());
+        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",new Date().getTime(),R.color.project_tartampion);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",new Date().getTime(),R.color.project_lucidia);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",new Date().getTime(),R.color.project_circus);
 
-        assertEquals("Projet Tartampion", task1.getProject().getName());
-        assertEquals("Projet Lucidia", task2.getProject().getName());
-        assertEquals("Projet Circus", task3.getProject().getName());
-        assertNull(task4.getProject());
+        assertEquals("Projet Tartampion", task1.getProjectName());
+        assertEquals("Projet Lucidia", task2.getProjectName());
+        assertEquals("Projet Circus", task3.getProjectName());
     }
 
     @Test
     public void test_az_comparator() {
-        final TaskCellModelUi task1 = new TaskCellModelUi(1, 1, "aaa", 123);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2, 2, "zzz", 124);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3, 3, "hhh", 125);
+        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,R.color.project_tartampion);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,R.color.project_lucidia);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,R.color.project_circus);
 
         final ArrayList<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
@@ -44,15 +42,15 @@ public class TaskUnitTest {
         Collections.sort(tasks, new TaskCellModelUi.TaskAZComparator());
 
         assertSame(tasks.get(0), task1);
-        assertSame(tasks.get(1), task3);
-        assertSame(tasks.get(2), task2);
+        assertSame(tasks.get(1), task2);
+        assertSame(tasks.get(2), task3);
     }
 
     @Test
     public void test_za_comparator() {
-        final TaskCellModelUi task1 = new TaskCellModelUi(1, 1, "aaa", 123);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2, 2, "zzz", 124);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3, 3, "hhh", 125);
+        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,R.color.project_tartampion);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,R.color.project_lucidia);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,R.color.project_circus);
 
         final ArrayList<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
@@ -60,16 +58,16 @@ public class TaskUnitTest {
         tasks.add(task3);
         Collections.sort(tasks, new TaskCellModelUi.TaskZAComparator());
 
-        assertSame(tasks.get(0), task2);
-        assertSame(tasks.get(1), task3);
+        assertSame(tasks.get(0), task3);
+        assertSame(tasks.get(1), task2);
         assertSame(tasks.get(2), task1);
     }
 
     @Test
     public void test_recent_comparator() {
-        final TaskCellModelUi task1 = new TaskCellModelUi(1, 1, "aaa", 123);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2, 2, "zzz", 124);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3, 3, "hhh", 125);
+        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,R.color.project_tartampion);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,R.color.project_lucidia);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,R.color.project_circus);
 
         final ArrayList<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
@@ -84,9 +82,9 @@ public class TaskUnitTest {
 
     @Test
     public void test_old_comparator() {
-        final TaskCellModelUi task1 = new TaskCellModelUi(1, 1, "aaa", 123);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2, 2, "zzz", 124);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3, 3, "hhh", 125);
+        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,R.color.project_tartampion);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,R.color.project_lucidia);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,R.color.project_circus);
 
         final ArrayList<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
