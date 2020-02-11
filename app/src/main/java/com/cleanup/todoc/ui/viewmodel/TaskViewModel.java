@@ -1,14 +1,18 @@
 package com.cleanup.todoc.ui.viewmodel;
 
+import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
+import com.cleanup.todoc.MainApplication;
 import com.cleanup.todoc.R;
 import com.cleanup.todoc.data.model.Project;
 import com.cleanup.todoc.data.model.Task;
@@ -116,10 +120,20 @@ public class TaskViewModel extends ViewModel {
 
                     // TODO LOULOUB UTILISER LE project.getId() POUR METTRE LA COULEUR
 
-                    taskCellModels.add(new TaskCellModelUi(task.getId(), project.getName(), task.getMessage(), task.getCreationTimestamp()));
+                    taskCellModels.add(
+                            new TaskCellModelUi(
+                                    task.getId(),
+                                    project.getName(),
+                                    task.getMessage(),
+                                    task.getCreationTimestamp(),
+                                    ContextCompat.getColor(MainApplication.getInstance(), R.color.colorAccent)
+                            ));
                 }
             }
         }
+
+        int violet = 6579455;
+        int bleu = 25855;
 
         isEmptyStateDisplayed = taskList.size() == 0;
 

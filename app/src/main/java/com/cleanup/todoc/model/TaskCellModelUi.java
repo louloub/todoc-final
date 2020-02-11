@@ -19,13 +19,11 @@ public class TaskCellModelUi {
     /**
      * The unique identifier of the project associated to the task
      */
-    // TODO LOULOUB PAS PERTINENT : IL FAUT METTRE DIRECTEMENT LE NOM DU PROJET EN STRING
+    // TODO LOULOUB IL MANQUE LE NOM DU PROJECT (EN STRING, C'EST LE VIEWMODEL QUI DOIT CALCULER CA)
     private String projectName;
 
-    // TODO LOULOUB IL MANQUE LE NOM DU PROJECT (EN STRING, C'EST LE VIEWMODELQUIN DOIT CALCULER CA)
-
     // TODO LOULOUB IL MANQUE LA COULEUR (EN COLOR INT OU COLOR RES, QU'IMPORTE)
-
+    private int color;
     /**
      * The name of the task
      */
@@ -46,12 +44,27 @@ public class TaskCellModelUi {
      * @param projectName         the unique identifier of the project associated to the task to set
      * @param name              the name of the task to set
      * @param creationTimestamp the timestamp when the task has been created to set
+     * @param color             color of the associate project
      */
-    public TaskCellModelUi(long id, String projectName, @NonNull String name, long creationTimestamp) {
+    public TaskCellModelUi(
+            long id,
+            String projectName,
+            @NonNull String name,
+            long creationTimestamp,
+            int color) {
         this.setId(id);
         this.setProjectName(projectName);
         this.setName(name);
         this.setCreationTimestamp(creationTimestamp);
+        this.setColor(color);
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
     /**

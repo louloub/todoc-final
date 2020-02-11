@@ -9,8 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cleanup.todoc.MainApplication;
 import com.cleanup.todoc.R;
 import com.cleanup.todoc.model.ProjectModelUi;
 import com.cleanup.todoc.model.TaskCellModelUi;
@@ -146,6 +148,15 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
             lblTaskName.setText(task.getName());
             imgDelete.setTag(task);
             lblProjectName.setText(task.getProjectName());
+
+            // imgProject.setBackgroundColor(task.getColor());
+
+            imgProject.setSupportImageTintList(ColorStateList.valueOf(task.getColor()));
+
+
+            // imgProject.setSupportImageTintList(ColorStateList.valueOf(task.getColor()));
+            // imgProject.setBackgroundColor(6579455);
+            // imgProject.setSupportImageTintList(ColorStateList.valueOf(6579455));
 
             /*// TODO LOULOUB A VIRER
             final ProjectModelUi taskProject = task.getProject();
