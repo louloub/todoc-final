@@ -29,9 +29,9 @@ public class TaskUnitTest {
     @Test
     public void test_projects() {
         // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",new Date().getTime(),R.color.project_tartampion);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",new Date().getTime(),R.color.project_lucidia);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",new Date().getTime(),R.color.project_circus);
+        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
 
         // THEN
         assertEquals("Projet Tartampion", task1.getProjectName());
@@ -42,7 +42,7 @@ public class TaskUnitTest {
     @Test
     public void addOneTask() {
         // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",new Date().getTime(),R.color.project_tartampion);
+        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
         List<TaskCellModelUi> taskCellModelUiList = new ArrayList<>();
         taskCellModelUiList.add(task1);
 
@@ -53,9 +53,9 @@ public class TaskUnitTest {
     @Test
     public void addThreeTask() {
         // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",new Date().getTime(),R.color.project_tartampion);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",new Date().getTime(),R.color.project_lucidia);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",new Date().getTime(),R.color.project_circus);
+        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
         List<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
         tasks.add(task2);
@@ -68,9 +68,9 @@ public class TaskUnitTest {
     @Test
     public void addThreeTaskAndDeleteOneTask() {
         // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",new Date().getTime(),R.color.project_tartampion);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",new Date().getTime(),R.color.project_lucidia);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",new Date().getTime(),R.color.project_circus);
+        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
         List<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
         tasks.add(task2);
@@ -88,9 +88,9 @@ public class TaskUnitTest {
     @Test
     public void addThreeTaskAndDeleteThreeTask() {
         // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",new Date().getTime(),R.color.project_tartampion);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",new Date().getTime(),R.color.project_lucidia);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",new Date().getTime(),R.color.project_circus);
+        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
         List<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
         tasks.add(task2);
@@ -108,9 +108,9 @@ public class TaskUnitTest {
     @Test
     public void test_az_comparator() {
         // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,R.color.project_tartampion);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,R.color.project_lucidia);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,R.color.project_circus);
+        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
 
         final ArrayList<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
@@ -129,9 +129,9 @@ public class TaskUnitTest {
     @Test
     public void test_za_comparator() {
         // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,R.color.project_tartampion);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,R.color.project_lucidia);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,R.color.project_circus);
+        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
 
         final ArrayList<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
@@ -150,9 +150,9 @@ public class TaskUnitTest {
     @Test
     public void test_recent_comparator() {
         // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,R.color.project_tartampion);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,R.color.project_lucidia);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,R.color.project_circus);
+        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
 
         final ArrayList<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
@@ -171,9 +171,9 @@ public class TaskUnitTest {
     @Test
     public void test_old_comparator() {
         // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,R.color.project_tartampion);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,R.color.project_lucidia);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,R.color.project_circus);
+        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
 
         final ArrayList<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
