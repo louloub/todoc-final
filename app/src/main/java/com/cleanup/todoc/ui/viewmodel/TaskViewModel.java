@@ -116,7 +116,7 @@ public class TaskViewModel extends ViewModel {
 
                     // TODO LOULOUB UTILISER LE project.getId() POUR METTRE LA COULEUR
 
-                    taskCellModels.add(new TaskCellModelUi(task.getId(), project.getId(), task.getMessage(), task.getCreationTimestamp()));
+                    taskCellModels.add(new TaskCellModelUi(task.getId(), project.getName(), task.getMessage(), task.getCreationTimestamp()));
                 }
             }
         }

@@ -145,8 +145,9 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
         void bind(TaskCellModelUi task) {
             lblTaskName.setText(task.getName());
             imgDelete.setTag(task);
+            lblProjectName.setText(task.getProjectName());
 
-            // TODO LOULOUB A VIRER
+            /*// TODO LOULOUB A VIRER
             final ProjectModelUi taskProject = task.getProject();
             if (taskProject != null) {
                 imgProject.setSupportImageTintList(ColorStateList.valueOf(taskProject.getColor()));
@@ -154,7 +155,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
             } else {
                 imgProject.setVisibility(View.INVISIBLE);
                 lblProjectName.setText("");
-            }
+            }*/
         }
     }
 }

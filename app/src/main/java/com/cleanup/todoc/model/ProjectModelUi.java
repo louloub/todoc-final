@@ -50,7 +50,7 @@ public class ProjectModelUi {
      * @param id the unique identifier of the project to return
      * @return the project with the given unique identifier, or null if it has not been found
      */
-    @Nullable
+    /*@Nullable
     // TODO LOULOUB A VIRER
     public static ProjectModelUi getProjectById(long id) {
         for (ProjectModelUi project : MainApplication.getAllProjects()) {
@@ -59,7 +59,7 @@ public class ProjectModelUi {
         }
         return null;
     }
-
+*/
     /**
      * Returns the unique identifier of the project.
      *
