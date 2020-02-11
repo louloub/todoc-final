@@ -56,7 +56,7 @@ public class MainActivitySortingTest {
     // TODO : method (new class) for DELETE fonctionnality
 
     @Test
-    public void mainActivitySortingTest() {
+    public void should_task_are_good_sorting_with_z_a_comparator() {
 
         createTask("tache 1","Projet Tartampion");
         createTask("tache 2","Projet Lucidia");
@@ -91,6 +91,44 @@ public class MainActivitySortingTest {
 
         onView(ViewMatchers.withId(R.id.list_tasks))
                 .check(matches(atPosition(2, withText("tache 1"))));
+    }
+
+    @Test
+    public void should_task_are_good_sorting_with_a_z_comparator() {
+
+        createTask("tache 1","Projet Tartampion");
+        createTask("tache 2","Projet Lucidia");
+        createTask("tache 3","Projet Circus");
+
+        // FILTER "A -> Z"
+        ViewInteraction actionMenuItemView = onView(
+                allOf(withId(R.id.action_filter), withContentDescription("Filter"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.action_bar),
+                                        1),
+                                0),
+                        isDisplayed()));
+        actionMenuItemView.perform(click());
+
+        ViewInteraction appCompatTextView = onView(
+                allOf(withId(R.id.title), withText("A -> Z"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.content),
+                                        0),
+                                0),
+                        isDisplayed()));
+        appCompatTextView.perform(click());
+
+        onView(ViewMatchers.withId(R.id.list_tasks))
+                .check(matches(atPosition(0, withText("tache 1"))));
+
+        onView(ViewMatchers.withId(R.id.list_tasks))
+                .check(matches(atPosition(1, withText("tache 2"))));
+
+        onView(ViewMatchers.withId(R.id.list_tasks))
+                .check(matches(atPosition(2, withText("tache 3"))));
     }
 
     public void newMethod(){
@@ -207,7 +245,7 @@ public class MainActivitySortingTest {
         textView10.check(matches(withText("tache 1")));*/
     }
 
-    private void createTask(String nomDeLaTache, String project) {
+    private void createTask(String taskName, String project) {
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.fab_add_task), withContentDescription("Ajouter une tâche"),
                         childAtPosition(
@@ -226,7 +264,9 @@ public class MainActivitySortingTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText(nomDeLaTache), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText(taskName), closeSoftKeyboard());
+
+        // TODO : use same code like sorting to select another project when create task
 
         //onView(withId(R.id.project_spinner)).perform(click());
 
