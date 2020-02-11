@@ -40,7 +40,7 @@ public class TaskUnitTest {
     }
 
     @Test
-    public void addOneTask() {
+    public void should_have_one_task_in_list_after_add_one_Task() {
         // GIVEN
         final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
         List<TaskCellModelUi> taskCellModelUiList = new ArrayList<>();
@@ -51,7 +51,7 @@ public class TaskUnitTest {
     }
 
     @Test
-    public void addThreeTask() {
+    public void should_have_three_task_in_list_after_add_three_task() {
         // GIVEN
         final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
         final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
@@ -66,7 +66,7 @@ public class TaskUnitTest {
     }
 
     @Test
-    public void addThreeTaskAndDeleteOneTask() {
+    public void should_have_two_task_in_list_after_add_three_task_and_delete_one_Task() {
         // GIVEN
         final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
         final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
@@ -86,7 +86,7 @@ public class TaskUnitTest {
     }
 
     @Test
-    public void addThreeTaskAndDeleteThreeTask() {
+    public void should_dont_have_task_in_list_after_add_three_task_and_delete_three_task() {
         // GIVEN
         final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
         final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
@@ -106,7 +106,7 @@ public class TaskUnitTest {
     }
 
     @Test
-    public void test_az_comparator() {
+    public void should_have_task_in_good_order_after_az_comparator() {
         // GIVEN
         final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
         final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
@@ -127,7 +127,7 @@ public class TaskUnitTest {
     }
 
     @Test
-    public void test_za_comparator() {
+    public void should_have_task_in_good_order_after_za_comparator() {
         // GIVEN
         final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
         final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
@@ -148,7 +148,7 @@ public class TaskUnitTest {
     }
 
     @Test
-    public void test_recent_comparator() {
+    public void should_have_task_in_good_order_after_recent_comparator() {
         // GIVEN
         final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
         final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
@@ -169,7 +169,7 @@ public class TaskUnitTest {
     }
 
     @Test
-    public void test_old_comparator() {
+    public void should_have_task_in_good_order_after_old_comparator() {
         // GIVEN
         final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
         final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
