@@ -20,11 +20,13 @@ public class TaskCellModelUi {
      * The unique identifier of the project associated to the task
      */
     // TODO LOULOUB PAS PERTINENT : IL FAUT METTRE DIRECTEMENT LE NOM DU PROJET EN STRING
-    private long projectId;
+    private int projectId;
 
     // TODO LOULOUB IL MANQUE LE NOM DU PROJECT (EN STRING, C'EST LE VIEWMODELQUIN DOIT CALCULER CA)
 
     // TODO LOULOUB IL MANQUE LA COULEUR (EN COLOR INT OU COLOR RES, QU'IMPORTE)
+
+    private int color;
 
     /**
      * The name of the task
@@ -46,12 +48,28 @@ public class TaskCellModelUi {
      * @param projectId         the unique identifier of the project associated to the task to set
      * @param name              the name of the task to set
      * @param creationTimestamp the timestamp when the task has been created to set
+     * @param color             the color of project
      */
-    public TaskCellModelUi(long id, long projectId, @NonNull String name, long creationTimestamp) {
+    public TaskCellModelUi(
+            long id,
+            int projectId,
+            @NonNull String name,
+            long creationTimestamp,
+            int color)
+    {
         this.setId(id);
         this.setProjectId(projectId);
         this.setName(name);
         this.setCreationTimestamp(creationTimestamp);
+        this.setColor(color);
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
     /**
@@ -77,7 +95,7 @@ public class TaskCellModelUi {
      *
      * @param projectId the unique identifier of the project associated to the task to set
      */
-    private void setProjectId(long projectId) {
+    private void setProjectId(int projectId) {
         this.projectId = projectId;
     }
 
@@ -86,10 +104,13 @@ public class TaskCellModelUi {
      *
      * @return the project associated to the task
      */
+    /*@Nullable
+    public String getProject() {
+        return ProjectModelUi.getName();
+    }*/
+
     @Nullable
     public ProjectModelUi getProject() {
-
-
         return ProjectModelUi.getProjectById(projectId);
     }
 

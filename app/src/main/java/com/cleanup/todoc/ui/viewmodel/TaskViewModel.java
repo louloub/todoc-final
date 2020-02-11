@@ -113,10 +113,23 @@ public class TaskViewModel extends ViewModel {
         for (Task task : taskList) {
             for (Project project : projectList) {
                 if (project.getId() == task.getProjectId()) {
+                    int taskColor = 0;
 
                     // TODO LOULOUB UTILISER LE project.getId() POUR METTRE LA COULEUR
 
-                    taskCellModels.add(new TaskCellModelUi(task.getId(), project.getId(), task.getMessage(), task.getCreationTimestamp()));
+                    switch (project.getId()) {
+                        case 1 :
+                            taskColor = 0xFFEADAD1 ;
+                            break;
+                        case 2 :
+                            taskColor = 0xFFB4CDBA ;
+                            break;
+                        case 3 :
+                            taskColor = 0xFFA3CED2 ;
+                            break;
+                    }
+
+                    taskCellModels.add(new TaskCellModelUi(task.getId(), project.getId(), task.getMessage(), task.getCreationTimestamp(), 0xFFA3CED2));
                 }
             }
         }

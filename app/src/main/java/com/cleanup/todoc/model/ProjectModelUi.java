@@ -22,7 +22,7 @@ public class ProjectModelUi {
      * The name of the project
      */
     @NonNull
-    private final String name;
+    private static String name = null;
 
     /**
      * The hex (ARGB) code of the color associated to the project
@@ -75,7 +75,7 @@ public class ProjectModelUi {
      * @return the name of the project
      */
     @NonNull
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
