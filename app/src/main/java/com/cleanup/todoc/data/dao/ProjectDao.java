@@ -19,9 +19,6 @@ interface ProjectDao {
     @Query("SELECT * FROM Project")
     LiveData<List<Project>> getListProjectLiveData();
 
-    /*@Query("SELECT * FROM Project")
-    ProjectModelUi[] getListProject();*/
-
     @Insert
     void insertProject(Project project);
 

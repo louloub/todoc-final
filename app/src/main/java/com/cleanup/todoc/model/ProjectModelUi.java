@@ -4,6 +4,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.cleanup.todoc.MainApplication;
 import com.cleanup.todoc.data.repository.ProjectRoomRepository;
 
 /**
@@ -43,21 +44,6 @@ public class ProjectModelUi {
     }
 
     /**
-     * Returns all the projects of the application.
-     *
-     * @return all the projects of the application
-     */
-    @NonNull
-    // TODO LOULOUB A VIRER
-    public static ProjectModelUi[] getAllProjects() {
-        return new ProjectModelUi[]{
-                new ProjectModelUi(1, "Projet Tartampion", 0xFFEADAD1),
-                new ProjectModelUi(2, "Projet Lucidia", 0xFFB4CDBA),
-                new ProjectModelUi(3, "Projet Circus", 0xFFA3CED2),
-        };
-    }
-
-    /**
      * Returns the project with the given unique identifier, or null if no project with that
      * identifier can be found.
      *
@@ -67,7 +53,7 @@ public class ProjectModelUi {
     @Nullable
     // TODO LOULOUB A VIRER
     public static ProjectModelUi getProjectById(long id) {
-        for (ProjectModelUi project : getAllProjects()) {
+        for (ProjectModelUi project : MainApplication.getAllProjects()) {
             if (project.id == id)
                 return project;
         }

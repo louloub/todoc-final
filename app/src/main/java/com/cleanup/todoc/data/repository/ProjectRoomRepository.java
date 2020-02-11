@@ -19,6 +19,7 @@ public class ProjectRoomRepository implements ProjectRepository {
         AppDatabase db = AppDatabase.getInstance();
         ProjectDao mProject = db.projectDao();
         mProjectListLiveData = mProject.getListProjectLiveData();
+
         /*if (mProject.getListProjectLiveData().getValue() != null) {
             mProjectModelUi = (ProjectModelUi[]) Objects.requireNonNull(mProject.getListProjectLiveData().getValue()).toArray();
         }*/
@@ -29,7 +30,7 @@ public class ProjectRoomRepository implements ProjectRepository {
         return mProjectListLiveData;
     }
 
-    /*public static ProjectModelUi[] getProjectModelUi() {
+    public static ProjectModelUi[] getListProjectModelUiLiveData() {
         return mProjectModelUi;
-    }*/
+    }
 }

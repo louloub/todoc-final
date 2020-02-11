@@ -88,6 +88,8 @@ public class TaskCellModelUi {
      */
     @Nullable
     public ProjectModelUi getProject() {
+
+
         return ProjectModelUi.getProjectById(projectId);
     }
 
