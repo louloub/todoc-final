@@ -12,6 +12,7 @@ import android.view.ViewParent;
 
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.ViewMatchers;
 
 import com.cleanup.todoc.R;
@@ -38,6 +39,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withContentDesc
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
+import static com.cleanup.todoc.AndroidTestUtil.atPosition;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.instanceOf;
@@ -81,37 +83,18 @@ public class MainActivitySortingTest {
                         isDisplayed()));
         appCompatTextView.perform(click());
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.lbl_task_name), withText("tache 3"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class),
-                                        1),
-                                0),
-                        isDisplayed()));
-        textView.check(matches(withText("tache 3")));
+        onView(ViewMatchers.withId(R.id.list_tasks))
+                .check(matches(atPosition(0, withText("tache 3"))));
 
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.lbl_task_name), withText("tache 2"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class),
-                                        1),
-                                0),
-                        isDisplayed()));
-        textView2.check(matches(withText("tache 2")));
+        onView(ViewMatchers.withId(R.id.list_tasks))
+                .check(matches(atPosition(1, withText("tache 2"))));
 
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.lbl_task_name), withText("tache 1"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class),
-                                        1),
-                                0),
-                        isDisplayed()));
-        textView3.check(matches(withText("tache 1")));
+        onView(ViewMatchers.withId(R.id.list_tasks))
+                .check(matches(atPosition(2, withText("tache 1"))));
+    }
 
-        // FILTER "Les plus anciens d’abord"
+    public void newMethod(){
+        /*// FILTER "Les plus anciens d’abord"
         ViewInteraction actionMenuItemView2 = onView(
                 allOf(withId(R.id.action_filter), withContentDescription("Filter"),
                         childAtPosition(
@@ -221,7 +204,7 @@ public class MainActivitySortingTest {
                                         1),
                                 0),
                         isDisplayed()));
-        textView10.check(matches(withText("tache 1")));
+        textView10.check(matches(withText("tache 1")));*/
     }
 
     private void createTask(String nomDeLaTache, String project) {
@@ -245,12 +228,44 @@ public class MainActivitySortingTest {
                         isDisplayed()));
         appCompatEditText.perform(replaceText(nomDeLaTache), closeSoftKeyboard());
 
+        //onView(withId(R.id.project_spinner)).perform(click());
+
+        /*onView(withId(R.id.project_spinner)).perform(click());
+        onData(allOf(is(instanceOf(String.class)))).atPosition(1).perform(click());*/
+
+        //Espresso.onData(new RoomSpinnerItemMatcher(room)).perform(ViewActions.scrollTo(), ViewActions.click());
+
+        /*onData(allOf(is(instanceOf(String.class)),
+                is(project))).inRoot(isPlatformPopup()).perform(click());*/
+
+        /*ViewInteraction customTextView = onView(
+                allOf(withId(R.id.project_spinner), withText("Project Tartampion"), isDisplayed()));
+        customTextView.perform(click());*/
+
+        /*DataInteraction appCompatCheckedTextView = onData(anything())
+                .inAdapterView(childAtPosition(
+                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
+                        0))
+                .atPosition(1);
+        appCompatCheckedTextView.perform(click());*/
+
+
+        /*onView(ViewMatchers.withId(R.id.project_spinner)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is(project))).perform(click());
+        onView(withId(R.id.project_spinner)).check(matches(withSpinnerText(containsString(project))));
+        */
+
+        /*onData(allOf(is(instanceOf(String.class)), is(project)))
+                .perform(click());
+        onView(withId(R.id.project_spinner))
+                .check(matches(withSpinnerText(containsString(project))));*/
+
         /*onData(allOf(is(instanceOf(String.class)), is(project)))
                 .perform(click());
         onView(withId(R.id.project_spinner))
                 .check(matches(withSpinnerText(containsString(project))));
         */
-        onView(ViewMatchers.withId(R.id.project_spinner)).perform(click());
+
         // onData(allOf(is(instanceOf(String.class)), is(project))).perform(click());
         // Espresso.onData(allOf(is(instanceOf(Integer.class)))).atPosition(1).perform(ViewActions.click());
 
