@@ -2,6 +2,7 @@ package com.cleanup.todoc.ui.activity;
 
 
 import android.support.test.espresso.DataInteraction;
+import android.support.test.espresso.ViewAssertion;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
@@ -15,6 +16,7 @@ import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.ViewMatchers;
 
+import com.cleanup.todoc.AndroidTestUtil;
 import com.cleanup.todoc.R;
 
 import org.hamcrest.Description;
@@ -53,11 +55,36 @@ public class MainActivitySortingTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
-    // TODO : method (new class) for DELETE fonctionnality
+    @Test
+    public void should_three_task_are_display_after_add_three_task(){
+        createTask("tache 1","Projet Tartampion");
+        createTask("tache 2","Projet Lucidia");
+        createTask("tache 3","Projet Circus");
+
+        onView(withId(R.id.list_tasks)).check(new AndroidTestUtil.RecyclerViewItemCountAssertion(3));
+    }
+
+    @Test
+    public void should_two_task_are_display_after_add_three_task_and_delete_one_task(){
+        createTask("tache 1","Projet Tartampion");
+        createTask("tache 2","Projet Lucidia");
+        createTask("tache 3","Projet Circus");
+
+        ViewInteraction appCompatImageView = onView(
+                allOf(withId(R.id.img_delete),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.list_tasks),
+                                        0),
+                                1),
+                        isDisplayed()));
+        appCompatImageView.perform(click());
+
+        onView(withId(R.id.list_tasks)).check(new AndroidTestUtil.RecyclerViewItemCountAssertion(2));
+    }
 
     @Test
     public void should_task_are_good_sorting_with_z_a_comparator() {
-
         createTask("tache 1","Projet Tartampion");
         createTask("tache 2","Projet Lucidia");
         createTask("tache 3","Projet Circus");
@@ -129,6 +156,82 @@ public class MainActivitySortingTest {
 
         onView(ViewMatchers.withId(R.id.list_tasks))
                 .check(matches(atPosition(2, withText("tache 3"))));
+    }
+
+    @Test
+    public void should_task_are_good_sorting_with_old_comparator() {
+
+        createTask("tache 1","Projet Tartampion");
+        createTask("tache 2","Projet Lucidia");
+        createTask("tache 3","Projet Circus");
+
+        // FILTER "A -> Z"
+        ViewInteraction actionMenuItemView = onView(
+                allOf(withId(R.id.action_filter), withContentDescription("Filter"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.action_bar),
+                                        1),
+                                0),
+                        isDisplayed()));
+        actionMenuItemView.perform(click());
+
+        ViewInteraction appCompatTextView = onView(
+                allOf(withId(R.id.title), withText("Les plus anciens d’abord"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.content),
+                                        0),
+                                0),
+                        isDisplayed()));
+        appCompatTextView.perform(click());
+
+        onView(ViewMatchers.withId(R.id.list_tasks))
+                .check(matches(atPosition(0, withText("tache 1"))));
+
+        onView(ViewMatchers.withId(R.id.list_tasks))
+                .check(matches(atPosition(1, withText("tache 2"))));
+
+        onView(ViewMatchers.withId(R.id.list_tasks))
+                .check(matches(atPosition(2, withText("tache 3"))));
+    }
+
+    @Test
+    public void should_task_are_good_sorting_with_recent_comparator() {
+
+        createTask("tache 1","Projet Tartampion");
+        createTask("tache 2","Projet Lucidia");
+        createTask("tache 3","Projet Circus");
+
+        // FILTER "A -> Z"
+        ViewInteraction actionMenuItemView = onView(
+                allOf(withId(R.id.action_filter), withContentDescription("Filter"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.action_bar),
+                                        1),
+                                0),
+                        isDisplayed()));
+        actionMenuItemView.perform(click());
+
+        ViewInteraction appCompatTextView = onView(
+                allOf(withId(R.id.title), withText("Les plus récents d’abord"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.content),
+                                        0),
+                                0),
+                        isDisplayed()));
+        appCompatTextView.perform(click());
+
+        onView(ViewMatchers.withId(R.id.list_tasks))
+                .check(matches(atPosition(0, withText("tache 3"))));
+
+        onView(ViewMatchers.withId(R.id.list_tasks))
+                .check(matches(atPosition(1, withText("tache 2"))));
+
+        onView(ViewMatchers.withId(R.id.list_tasks))
+                .check(matches(atPosition(2, withText("tache 1"))));
     }
 
     public void newMethod(){
