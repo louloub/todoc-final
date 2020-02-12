@@ -24,14 +24,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AndroidTestUtil {
 
-    public static class RecyclerViewItemCountAssertion implements ViewAssertion, android.support.test.espresso.ViewAssertion {
+    public static class RecyclerViewItemCountAssertion implements ViewAssertion {
         private final int expectedCount;
 
         public RecyclerViewItemCountAssertion(int expectedCount) {
             this.expectedCount = expectedCount;
         }
 
-        @Override
         public void check(View view, NoMatchingViewException noViewFoundException) {
             if (noViewFoundException != null) {
                 throw noViewFoundException;
@@ -44,7 +43,7 @@ public class AndroidTestUtil {
             }
         }
 
-        @Override
+        /*@Override
         public void check(View view, android.support.test.espresso.NoMatchingViewException noViewFoundException) {
             if (noViewFoundException != null) {
                 throw noViewFoundException;
@@ -55,7 +54,7 @@ public class AndroidTestUtil {
             if (adapter != null) {
                 assertThat(adapter.getItemCount(), is(expectedCount));
             }
-        }
+        }*/
     }
 
     public static class MyRecyclerViewFinder {
