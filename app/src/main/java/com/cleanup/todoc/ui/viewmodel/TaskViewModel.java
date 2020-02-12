@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModel;
 import com.cleanup.todoc.R;
 import com.cleanup.todoc.data.model.Project;
 import com.cleanup.todoc.data.model.Task;
-import com.cleanup.todoc.data.repository.ProjectRoomRepository;
+import com.cleanup.todoc.data.repository.ProjectRepository;
 import com.cleanup.todoc.data.repository.TaskRepository;
 import com.cleanup.todoc.model.ProjectModelUi;
 import com.cleanup.todoc.model.TaskCellModelUi;
@@ -26,7 +26,7 @@ import static com.cleanup.todoc.ui.viewmodel.SortMethod.ALPHABETICAL;
 
 public class TaskViewModel extends ViewModel {
 
-    private ProjectRoomRepository mProjectRoomRepository;
+    private ProjectRepository mProjectRoomRepository;
     private TaskRepository mTaskRepository;
 
     private MediatorLiveData<TasksModelUi> mTaskModelUiMediatorLiveData = new MediatorLiveData<>();
@@ -37,7 +37,7 @@ public class TaskViewModel extends ViewModel {
         return mTaskModelUiMediatorLiveData;
     }
 
-    public TaskViewModel(ProjectRoomRepository projectRoomRepository, final TaskRepository taskRepository) {
+    public TaskViewModel(ProjectRepository projectRoomRepository, final TaskRepository taskRepository) {
         this.mProjectRoomRepository = projectRoomRepository;
         this.mTaskRepository = taskRepository;
 

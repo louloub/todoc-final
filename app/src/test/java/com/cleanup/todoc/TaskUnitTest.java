@@ -1,25 +1,84 @@
 package com.cleanup.todoc;
 
-import com.cleanup.todoc.model.TaskCellModelUi;
+import androidx.lifecycle.MutableLiveData;
 
+import com.cleanup.todoc.data.model.Project;
+import com.cleanup.todoc.data.model.Task;
+import com.cleanup.todoc.data.repository.ProjectRepository;
+import com.cleanup.todoc.data.repository.TaskRepository;
+import com.cleanup.todoc.model.TasksModelUi;
+import com.cleanup.todoc.ui.viewmodel.TaskViewModel;
+
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.BDDMockito.given;
 
 /**
  * Unit tests for tasks
  *
  * @author Gaëtan HERFRAY
  */
+@RunWith(MockitoJUnitRunner.class)
 public class TaskUnitTest {
+
+    @Mock
+    private ProjectRepository projectRepository;
+
+    @Mock
+    private TaskRepository taskRepository;
+
+    private TaskViewModel viewModel;
+
+    private MutableLiveData<List<Project>> projectsLiveData;
+    private MutableLiveData<List<Task>> tasksLiveData;
+
+    @Before
+    public void setUp() {
+        projectsLiveData = new MutableLiveData<>();
+        tasksLiveData = new MutableLiveData<>();
+
+        given(projectRepository.getProjectListLiveData()).willReturn(projectsLiveData);
+        given(taskRepository.getTaskListLiveData()).willReturn(tasksLiveData);
+
+        viewModel = new TaskViewModel(projectRepository, taskRepository);
+    }
+
+    @Test
+    public void given_one_project_and_one_task_should_expose_one_TasksModelUi() throws InterruptedException {
+        // Given
+        List<Project> projects = new ArrayList<>();
+        projects.add(new Project("First project"));
+        projectsLiveData.setValue(projects);
+
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(new Task(0, "Nettoyer Android.support c naze"));
+        tasksLiveData.setValue(tasks);
+
+        // When
+        TasksModelUi tasksModelUi = LiveDataTestUtils.getOrAwaitValue(viewModel.getTaskModelUiMediatorLiveData());
+
+        // Then
+        assertFalse(tasksModelUi.isEmptyStateDisplayed());
+        assertEquals(0, tasksModelUi.getEmptyTaskNameErrorStringRes());
+        assertNotNull(tasksModelUi.getTaskCellModels());
+        assertEquals(1, tasksModelUi.getTaskCellModels().size());
+        assertEquals("Nettoyer Android.support c naze", tasksModelUi.getTaskCellModels().get(0).getName());
+    }
+
+    /*
     @Test
     public void test_projects() {
+
         final TaskCellModelUi task1 = new TaskCellModelUi(1, 1, "task 1", new Date().getTime());
         final TaskCellModelUi task2 = new TaskCellModelUi(2, 2, "task 2", new Date().getTime());
         final TaskCellModelUi task3 = new TaskCellModelUi(3, 3, "task 3", new Date().getTime());
@@ -97,5 +156,5 @@ public class TaskUnitTest {
         assertSame(tasks.get(0), task1);
         assertSame(tasks.get(1), task2);
         assertSame(tasks.get(2), task3);
-    }
+    }*/
 }
