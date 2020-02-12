@@ -151,6 +151,7 @@ public class TaskViewModel extends ViewModel {
 
         isEmptyStateDisplayed = taskList.size() == 0;
 
+        // TODO loulou don't work
         if (isTaskNameEmpty != null && isTaskNameEmpty) {
             emptyTaskNameErrorStringRes = R.string.empty_task_name;
         }
