@@ -1,7 +1,5 @@
 package com.cleanup.todoc.ui.viewmodel;
 
-import android.app.Application;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -118,8 +116,6 @@ public class TaskViewModel extends ViewModel {
             for (Project project : projectList) {
                 if (project.getId() == task.getProjectId()) {
 
-                    // TODO LOULOUB UTILISER LE project.getId() POUR METTRE LA COULEUR
-
                     int colorProject = 0;
 
                     switch (project.getName()){
@@ -145,9 +141,6 @@ public class TaskViewModel extends ViewModel {
                 }
             }
         }
-
-        int violet = 6579455;
-        int bleu = 25855;
 
         isEmptyStateDisplayed = taskList.size() == 0;
 

@@ -2,10 +2,6 @@ package com.cleanup.todoc.model;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.cleanup.todoc.MainApplication;
-import com.cleanup.todoc.data.repository.ProjectRoomRepository;
 
 /**
  * <p>Models for project in which tasks are included.</p>
@@ -44,24 +40,6 @@ public class ProjectModelUi {
     }
 
     /**
-     * Returns the project with the given unique identifier, or null if no project with that
-     * identifier can be found.
-     *
-     * @param id the unique identifier of the project to return
-     * @return the project with the given unique identifier, or null if it has not been found
-     */
-    /*@Nullable
-    // TODO LOULOUB A VIRER
-    public static ProjectModelUi getProjectById(long id) {
-        for (ProjectModelUi project : MainApplication.getAllProjects()) {
-            if (project.id == id)
-                return project;
-        }
-        return null;
-    }
-    */
-
-    /**
      * Returns the unique identifier of the project.
      *
      * @return the unique identifier of the project
@@ -78,16 +56,6 @@ public class ProjectModelUi {
     @NonNull
     public String getName() {
         return name;
-    }
-
-    /**
-     * Returns the hex (ARGB) code of the color associated to the project.
-     *
-     * @return the hex (ARGB) code of the color associated to the project
-     */
-    @ColorInt
-    public int getColor() {
-        return color;
     }
 
     @Override

@@ -54,8 +54,6 @@ public class TaskDaoTest {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     private AppDatabase mDatabase;
-    private TaskDao taskDao;
-    private ProjectDao projectDao;
 
     @Before
     public void initDb() throws Exception {
@@ -65,8 +63,6 @@ public class TaskDaoTest {
                 "Database.db"
         ).allowMainThreadQueries()
                 .build();
-        taskDao = mDatabase.taskDao();
-        projectDao = mDatabase.projectDao();
     }
 
     // 1
@@ -210,77 +206,4 @@ public class TaskDaoTest {
                                 3)));
         appCompatButton.perform(scrollTo(), click());
     }
-
-
-    /*@Test
-    public void add_three_task_on_db(){
-        taskDao.insertTask((new Task(0,"task 1",new Date().getTime())));
-        taskDao.insertTask((new Task(1,"task 2",new Date().getTime())));
-        taskDao.insertTask((new Task(2,"task 3",new Date().getTime())));
-    }
-
-    @Test
-    public void getListTaskLiveData() throws InterruptedException {
-        List < Task > taskList = LiveDataTestUtil.getValue(taskDao.getListTaskLiveData());
-        int i = taskList.size();
-        int y = 0;
-    }
-
-    @Test
-    public void getListProjectLiveData() throws InterruptedException {
-        List <Project> projectList = LiveDataTestUtil.getValue(projectDao.getListProjectLiveData());
-        int i = projectList.size();
-        int y = 0;
-    }
-
-    @Test
-    public void should_db_return_task_after_add_task_on_db(){
-        // GIVEN
-        projectDao.insertProject(new Project("Projet Tartampion"));
-        projectDao.insertProject(new Project("Projet Lucidia"));
-        projectDao.insertProject(new Project("Projet Circus"));
-        *//*taskDao.insertTask((new Task(0,"task 1",new Date().getTime())));
-        taskDao.insertTask((new Task(1,"task 2",new Date().getTime())));
-        taskDao.insertTask((new Task(2,"task 3",new Date().getTime())));*//*
-
-        // WHEN
-        Cursor mCursor = mDatabase.query("SELECT * FROM Project",null);
-
-        // THEN
-        assertEquals(3, mCursor.getCount());
-    }
-
-    @After
-    public void closeDb() throws Exception {
-        mDatabase.close();
-    }
-*/
-    /*@Test
-    public void onFetchingTask_shouldGetEmptyList_IfTable_IsEmpty() throws InterruptedException {
-        List<Task> taskList = LiveDataTestUtil.getValue(taskDao.getListTaskLiveData());
-        assertTrue(taskList.isEmpty());
-    }
-
-    @Test
-    public void onInsertingTask_checkIf_RowCountIsCorrect() throws InterruptedException {
-        List < Task > noteList = FakeTaskSource.getFakeNotes(5);
-        noteList.forEach(new Consumer<Task>() {
-            @Override
-            public void accept(Task task) {
-                taskDao.insertTask(task);
-            }
-        });
-        assertEquals(5, LiveDataTestUtil.getValue(taskDao.getListTaskLiveData()).size());
-    }*/
-
-    /*@Test
-    public void onUpdatingANote_checkIf_UpdateHappensCorrectly() throws InterruptedException {
-        Task task = FakeTaskSource.fetchFakeNote();
-        taskDao.insertTask(task);
-        task.setName("task 1");
-        taskDao.update(note);
-        assertEquals(1, LiveDataTestUtil.getValue(notesDao.getAllNotes()).size());
-        assertEquals(FakeNotesSource.FAKE_NOTE_UPDATED_TITLE,
-                LiveDataTestUtil.getValue(notesDao.getNoteById(note.getId())).getNoteTitle());
-    }*/
 }

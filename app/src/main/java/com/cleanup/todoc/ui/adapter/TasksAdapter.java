@@ -149,16 +149,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
             imgDelete.setTag(task);
             lblProjectName.setText(task.getProjectName());
             imgProject.setSupportImageTintList(ColorStateList.valueOf(task.getColor()));
-
-            /*// TODO LOULOUB A VIRER
-            final ProjectModelUi taskProject = task.getProject();
-            if (taskProject != null) {
-                imgProject.setSupportImageTintList(ColorStateList.valueOf(taskProject.getColor()));
-                lblProjectName.setText(taskProject.getName());
-            } else {
-                imgProject.setVisibility(View.INVISIBLE);
-                lblProjectName.setText("");
-            }*/
         }
     }
 }

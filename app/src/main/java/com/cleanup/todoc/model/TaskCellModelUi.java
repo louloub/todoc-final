@@ -1,7 +1,6 @@
 package com.cleanup.todoc.model;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.Comparator;
 
@@ -19,10 +18,8 @@ public class TaskCellModelUi {
     /**
      * The unique identifier of the project associated to the task
      */
-    // TODO LOULOUB IL MANQUE LE NOM DU PROJECT (EN STRING, C'EST LE VIEWMODEL QUI DOIT CALCULER CA)
     private String projectName;
 
-    // TODO LOULOUB IL MANQUE LA COULEUR (EN COLOR INT OU COLOR RES, QU'IMPORTE)
     /**
      * The color of the task
      */

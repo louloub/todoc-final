@@ -23,8 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cleanup.todoc.MainApplication;
 import com.cleanup.todoc.R;
 import com.cleanup.todoc.ViewModelFactory;
-import com.cleanup.todoc.data.dataBase.AppDatabase;
-import com.cleanup.todoc.data.repository.ProjectRoomRepository;
 import com.cleanup.todoc.model.ProjectModelUi;
 import com.cleanup.todoc.model.TaskCellModelUi;
 import com.cleanup.todoc.model.TasksModelUi;
@@ -41,12 +39,6 @@ import com.cleanup.todoc.ui.viewmodel.TaskViewModel;
 public class MainActivity extends AppCompatActivity implements TasksAdapter.DeleteTaskListener {
 
     TaskViewModel mTaskViewModel;
-
-    // private final ProjectModelUi[] mAllProjects = ProjectModelUi.getAllProjects();
-
-    // private final ProjectModelUi[] mAllProjects = mTaskViewModel.getAllProjects();
-
-    // private final ProjectModelUi[] mAllProjects = AppDatabase.getInstance().projectDao();
 
     private final ProjectModelUi[] mAllProjects = MainApplication.getAllProjects();
 
