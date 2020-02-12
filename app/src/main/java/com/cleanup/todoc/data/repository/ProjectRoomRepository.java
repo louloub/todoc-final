@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ProjectRoomRepository implements ProjectRepository {
 
-    private LiveData<List<Project>> mProjectListLiveData;
+    private final LiveData<List<Project>> mProjectListLiveData;
 
     public ProjectRoomRepository() {
         AppDatabase db = AppDatabase.getInstance();

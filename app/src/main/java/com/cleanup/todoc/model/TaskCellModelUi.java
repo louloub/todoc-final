@@ -73,7 +73,7 @@ public class TaskCellModelUi {
      * Set the color of the task.
      *
      */
-    public void setColor(int color) {
+    private void setColor(int color) {
         this.color = color;
     }
 

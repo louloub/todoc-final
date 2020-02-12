@@ -12,8 +12,8 @@ import java.util.List;
 
 public class TaskRoomRepository implements TaskRepository {
 
-    private TaskDao mTaskDao;
-    private LiveData<List<Task>> mTaskListLiveData;
+    private final TaskDao mTaskDao;
+    private final LiveData<List<Task>> mTaskListLiveData;
 
     public TaskRoomRepository() {
         AppDatabase db = AppDatabase.getInstance();
@@ -40,7 +40,7 @@ public class TaskRoomRepository implements TaskRepository {
 
     private static class InsertAsyncTask extends AsyncTask<Task, Void, Void> {
 
-        private TaskDao mAsyncTaskDao;
+        private final TaskDao mAsyncTaskDao;
 
         InsertAsyncTask(TaskDao dao) {
             mAsyncTaskDao = dao;

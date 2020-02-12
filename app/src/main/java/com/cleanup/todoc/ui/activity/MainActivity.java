@@ -38,14 +38,14 @@ import com.cleanup.todoc.ui.viewmodel.TaskViewModel;
  */
 public class MainActivity extends AppCompatActivity implements TasksAdapter.DeleteTaskListener {
 
-    TaskViewModel mTaskViewModel;
+    private TaskViewModel mTaskViewModel;
 
     private final ProjectModelUi[] mAllProjects = MainApplication.getAllProjects();
 
     private final TasksAdapter mTaskAdapter = new TasksAdapter(this);
 
     @Nullable
-    public AlertDialog mAlertDialog = null;
+    private AlertDialog mAlertDialog = null;
 
     @Nullable
     private EditText mDialogEditText = null;

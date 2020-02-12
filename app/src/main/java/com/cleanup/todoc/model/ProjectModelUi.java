@@ -54,7 +54,7 @@ public class ProjectModelUi {
      * @return the name of the project
      */
     @NonNull
-    public String getName() {
+    private String getName() {
         return name;
     }
 

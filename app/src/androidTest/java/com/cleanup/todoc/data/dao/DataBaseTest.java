@@ -2,33 +2,20 @@ package com.cleanup.todoc.data.dao;
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 import android.database.Cursor;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 
-import androidx.core.content.ContextCompat;
 import androidx.room.Room;
 
-import com.cleanup.todoc.AndroidTestUtil;
-import com.cleanup.todoc.FakeTaskSource;
-import com.cleanup.todoc.LiveDataTestUtil;
 import com.cleanup.todoc.MainApplication;
 import com.cleanup.todoc.R;
 import com.cleanup.todoc.data.dataBase.AppDatabase;
-import com.cleanup.todoc.data.model.Project;
-import com.cleanup.todoc.data.model.Task;
-import com.cleanup.todoc.model.ProjectModelUi;
 import com.cleanup.todoc.ui.activity.MainActivity;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import java.util.Date;
-import java.util.List;
-import java.util.function.Consumer;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -42,10 +29,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.cleanup.todoc.ui.activity.MainActivityTest.childAtPosition;
 import static org.hamcrest.Matchers.allOf;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @LargeTest
-public class TaskDaoTest {
+public class DataBaseTest {
 
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
@@ -56,7 +42,7 @@ public class TaskDaoTest {
     private AppDatabase mDatabase;
 
     @Before
-    public void initDb() throws Exception {
+    public void initDb() {
         mDatabase = Room.databaseBuilder(
                 MainApplication.getInstance(),
                 AppDatabase.class,
@@ -69,9 +55,9 @@ public class TaskDaoTest {
     @Test
     public void should_three_task_are_in_db_after_add_three_task(){
         // GIVEN
-        createTask("tache 1","Projet Tartampion");
-        createTask("tache 2","Projet Lucidia");
-        createTask("tache 3","Projet Circus");
+        createTask("tache 1");
+        createTask("tache 2");
+        createTask("tache 3");
 
         // WHEN
         Cursor mCursor = mDatabase.query("SELECT * FROM Task",null);
@@ -80,7 +66,7 @@ public class TaskDaoTest {
         assertEquals(3, mCursor.getCount());
     }
 
-    private void createTask(String taskName, String project) {
+    private void createTask(String taskName) {
         // Click on "add tack button"
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.fab_add_task), withContentDescription("Ajouter une tâche"),

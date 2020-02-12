@@ -18,11 +18,11 @@ public class Task {
     @PrimaryKey(autoGenerate = true)
     private int id = 0;
 
-    private int projectId;
+    private final int projectId;
 
-    private String message;
+    private final String message;
 
-    private long creationTimestamp;
+    private final long creationTimestamp;
 
     public Task(int projectId, String message, long creationTimestamp) {
         this.projectId = projectId;

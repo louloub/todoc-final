@@ -29,12 +29,12 @@ import static com.cleanup.todoc.ui.viewmodel.SortMethod.ALPHABETICAL;
 
 public class TaskViewModel extends ViewModel {
 
-    private ProjectRoomRepository mProjectRoomRepository;
-    private TaskRepository mTaskRepository;
+    private final ProjectRoomRepository mProjectRoomRepository;
+    private final TaskRepository mTaskRepository;
 
-    private MediatorLiveData<TasksModelUi> mTaskModelUiMediatorLiveData = new MediatorLiveData<>();
-    private MutableLiveData<SortMethod> mSortMethodLiveData = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mIsTaskNameEmpty = new MutableLiveData<>();
+    private final MediatorLiveData<TasksModelUi> mTaskModelUiMediatorLiveData = new MediatorLiveData<>();
+    private final MutableLiveData<SortMethod> mSortMethodLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mIsTaskNameEmpty = new MutableLiveData<>();
 
     public LiveData<TasksModelUi> getTaskModelUiMediatorLiveData() {
         return mTaskModelUiMediatorLiveData;

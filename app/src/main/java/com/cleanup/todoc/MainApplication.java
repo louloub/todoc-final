@@ -37,7 +37,7 @@ public class MainApplication extends Application {
         };
     }
 
-    public void createProjectOnDataBase(){
+    private void createProjectOnDataBase(){
 
         AppDatabase database = AppDatabase.getInstance();
 
@@ -50,8 +50,6 @@ public class MainApplication extends Application {
             projectDao.insertProject(new Project("Projet Tartampion"));
             projectDao.insertProject(new Project("Projet Lucidia"));
             projectDao.insertProject(new Project("Projet Circus"));
-        } else {
-
         }
     }
 }

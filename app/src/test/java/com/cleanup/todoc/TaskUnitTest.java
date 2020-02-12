@@ -1,22 +1,14 @@
 package com.cleanup.todoc;
 
-import android.bluetooth.BluetoothGattDescriptor;
-
-import androidx.lifecycle.MutableLiveData;
-
 import com.cleanup.todoc.model.TaskCellModelUi;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 
 /**
