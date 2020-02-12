@@ -116,19 +116,7 @@ public class TaskViewModel extends ViewModel {
             for (Project project : projectList) {
                 if (project.getId() == task.getProjectId()) {
 
-                    int colorProject = 0;
-
-                    switch (project.getName()){
-                        case "Projet Tartampion" :
-                            colorProject = ContextCompat.getColor(MainApplication.getInstance(), R.color.project_tartampion);
-                            break;
-                        case "Projet Lucidia" :
-                            colorProject = ContextCompat.getColor(MainApplication.getInstance(), R.color.project_lucidia);
-                            break;
-                        case "Projet Circus" :
-                            colorProject = ContextCompat.getColor(MainApplication.getInstance(), R.color.project_circus);
-                            break;
-                    }
+                    int colorProject = getColorProject(project);
 
                     taskCellModels.add(
                             new TaskCellModelUi(
@@ -173,6 +161,22 @@ public class TaskViewModel extends ViewModel {
             isEmptyStateDisplayed,
             emptyTaskNameErrorStringRes
         );
+    }
+
+    private int getColorProject(Project project) {
+        int colorProject = 0;
+        switch (project.getName()){
+            case "Projet Tartampion" :
+                colorProject = ContextCompat.getColor(MainApplication.getInstance(), R.color.project_tartampion);
+                break;
+            case "Projet Lucidia" :
+                colorProject = ContextCompat.getColor(MainApplication.getInstance(), R.color.project_lucidia);
+                break;
+            case "Projet Circus" :
+                colorProject = ContextCompat.getColor(MainApplication.getInstance(), R.color.project_circus);
+                break;
+        }
+        return colorProject;
     }
 
     public void addNewTask(@NonNull String taskName, @Nullable ProjectModelUi projectModelUi) {

@@ -19,19 +19,6 @@ import static org.junit.Assert.assertSame;
 public class TaskUnitTest {
 
     @Test
-    public void test_projects() {
-        // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
-
-        // THEN
-        assertEquals("Projet Tartampion", task1.getProjectName());
-        assertEquals("Projet Lucidia", task2.getProjectName());
-        assertEquals("Projet Circus", task3.getProjectName());
-    }
-
-    @Test
     public void should_have_one_task_in_list_after_add_one_Task() {
         // GIVEN
         final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);

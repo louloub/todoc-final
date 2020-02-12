@@ -1,6 +1,5 @@
 package com.cleanup.todoc.model;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 /**
@@ -21,22 +20,14 @@ public class ProjectModelUi {
     private final String name;
 
     /**
-     * The hex (ARGB) code of the color associated to the project
-     */
-    @ColorInt
-    private final int color;
-
-    /**
      * Instantiates a new ProjectModelUi.
      *
      * @param id    the unique identifier of the project to set
      * @param name  the name of the project to set
-     * @param color the hex (ARGB) code of the color associated to the project to set
      */
-    public ProjectModelUi(int id, @NonNull String name, @ColorInt int color) {
+    public ProjectModelUi(int id, @NonNull String name) {
         this.id = id;
         this.name = name;
-        this.color = color;
     }
 
     /**

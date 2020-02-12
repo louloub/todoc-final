@@ -1,4 +1,4 @@
-package com.cleanup.todoc.data.dao;
+package com.cleanup.todoc.dataBase;
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 import android.database.Cursor;
@@ -26,7 +26,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static com.cleanup.todoc.ui.activity.MainActivityTest.childAtPosition;
+import static com.cleanup.todoc.activity.MainActivityTest.childAtPosition;
 import static org.hamcrest.Matchers.allOf;
 import static org.junit.Assert.assertEquals;
 
