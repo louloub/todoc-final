@@ -1,170 +1,166 @@
 package com.cleanup.todoc;
 
-import com.cleanup.todoc.model.TaskCellModelUi;
+import android.arch.core.executor.testing.InstantTaskExecutorRule;
 
+import androidx.lifecycle.MutableLiveData;
+
+import com.cleanup.todoc.data.model.Project;
+import com.cleanup.todoc.data.model.Task;
+import com.cleanup.todoc.data.repository.ProjectRepository;
+import com.cleanup.todoc.data.repository.TaskRepository;
+import com.cleanup.todoc.model.TasksModelUi;
+import com.cleanup.todoc.ui.viewmodel.TaskViewModel;
+
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.BDDMockito.given;
 
 /**
  * Unit tests for tasks
  *
- * @author Gaëtan HERFRAY youhou
+ * @author Gaëtan HERFRAY
  */
+@RunWith(MockitoJUnitRunner.class)
 public class TaskUnitTest {
 
-    @Test
-    public void should_have_one_task_in_list_after_add_one_Task() {
-        // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
-        List<TaskCellModelUi> taskCellModelUiList = new ArrayList<>();
-        taskCellModelUiList.add(task1);
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
-        // THEN
-        assertEquals(1,taskCellModelUiList.size());
+    @Mock
+    private ProjectRepository projectRepository;
+
+    @Mock
+    private TaskRepository taskRepository;
+
+    private TaskViewModel viewModel;
+
+    private MutableLiveData<List<Project>> projectsLiveData;
+    private MutableLiveData<List<Task>> tasksLiveData;
+
+    @Before
+    public void setUp() {
+        projectsLiveData = new MutableLiveData<>();
+        tasksLiveData = new MutableLiveData<>();
+
+        given(projectRepository.getProjectListLiveData()).willReturn(projectsLiveData);
+        given(taskRepository.getTaskListLiveData()).willReturn(tasksLiveData);
+
+        viewModel = new TaskViewModel(projectRepository, taskRepository);
     }
 
     @Test
-    public void should_have_three_task_in_list_after_add_three_task() {
-        // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
-        List<TaskCellModelUi> tasks = new ArrayList<>();
-        tasks.add(task1);
-        tasks.add(task2);
-        tasks.add(task3);
+    public void given_one_project_and_one_task_should_expose_one_TasksModelUi() throws InterruptedException {
+        // Given
+        List<Project> projects = new ArrayList<>();
+        projects.add(new Project("First project"));
+        projectsLiveData.setValue(projects);
 
-        // THEN
-        assertEquals(3,tasks.size());
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(new Task(0, "Nettoyer Android.support c naze"));
+        tasksLiveData.setValue(tasks);
+
+        // When
+        TasksModelUi tasksModelUi = LiveDataTestUtils.getOrAwaitValue(viewModel.getTaskModelUiMediatorLiveData());
+
+        // Then
+        assertFalse(tasksModelUi.isEmptyStateDisplayed());
+        assertEquals(0, tasksModelUi.getEmptyTaskNameErrorStringRes());
+        assertNotNull(tasksModelUi.getTaskCellModels());
+        assertEquals(1, tasksModelUi.getTaskCellModels().size());
+        assertEquals("Nettoyer Android.support c naze", tasksModelUi.getTaskCellModels().get(0).getName());
+    }
+
+    /*
+    @Test
+    public void test_projects() {
+
+        final TaskCellModelUi task1 = new TaskCellModelUi(1, 1, "task 1", new Date().getTime());
+        final TaskCellModelUi task2 = new TaskCellModelUi(2, 2, "task 2", new Date().getTime());
+        final TaskCellModelUi task3 = new TaskCellModelUi(3, 3, "task 3", new Date().getTime());
+        final TaskCellModelUi task4 = new TaskCellModelUi(4, 4, "task 4", new Date().getTime());
+
+        assertEquals("Projet Tartampion", task1.getProject().getName());
+        assertEquals("Projet Lucidia", task2.getProject().getName());
+        assertEquals("Projet Circus", task3.getProject().getName());
+        assertNull(task4.getProject());
     }
 
     @Test
-    public void should_have_two_task_in_list_after_add_three_task_and_delete_one_Task() {
-        // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
-        List<TaskCellModelUi> tasks = new ArrayList<>();
-        tasks.add(task1);
-        tasks.add(task2);
-        tasks.add(task3);
-
-        // WHEN
-        tasks.remove(0);
-
-        // THEN
-        assertEquals(2,tasks.size());
-        assertSame(tasks.get(0), task2);
-        assertSame(tasks.get(1), task3);
-    }
-
-    @Test
-    public void should_dont_have_task_in_list_after_add_three_task_and_delete_three_task() {
-        // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
-        List<TaskCellModelUi> tasks = new ArrayList<>();
-        tasks.add(task1);
-        tasks.add(task2);
-        tasks.add(task3);
-
-        // WHEN
-        tasks.remove(0);
-        tasks.remove(0);
-        tasks.remove(0);
-
-        // THEN
-        assertEquals(0,tasks.size());
-    }
-
-    @Test
-    public void should_have_task_in_good_order_after_az_comparator() {
-        // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
+    public void test_az_comparator() {
+        final TaskCellModelUi task1 = new TaskCellModelUi(1, 1, "aaa", 123);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2, 2, "zzz", 124);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3, 3, "hhh", 125);
 
         final ArrayList<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
-
-        // WHEN
         Collections.sort(tasks, new TaskCellModelUi.TaskAZComparator());
 
-        // THEN
         assertSame(tasks.get(0), task1);
-        assertSame(tasks.get(1), task2);
-        assertSame(tasks.get(2), task3);
+        assertSame(tasks.get(1), task3);
+        assertSame(tasks.get(2), task2);
     }
 
     @Test
-    public void should_have_task_in_good_order_after_za_comparator() {
-        // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
+    public void test_za_comparator() {
+        final TaskCellModelUi task1 = new TaskCellModelUi(1, 1, "aaa", 123);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2, 2, "zzz", 124);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3, 3, "hhh", 125);
 
         final ArrayList<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
-
-        // WHEN
         Collections.sort(tasks, new TaskCellModelUi.TaskZAComparator());
 
-        // THEN
-        assertSame(tasks.get(0), task3);
-        assertSame(tasks.get(1), task2);
+        assertSame(tasks.get(0), task2);
+        assertSame(tasks.get(1), task3);
         assertSame(tasks.get(2), task1);
     }
 
     @Test
-    public void should_have_task_in_good_order_after_recent_comparator() {
-        // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
+    public void test_recent_comparator() {
+        final TaskCellModelUi task1 = new TaskCellModelUi(1, 1, "aaa", 123);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2, 2, "zzz", 124);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3, 3, "hhh", 125);
 
         final ArrayList<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
-
-        // WHEN
         Collections.sort(tasks, new TaskCellModelUi.TaskRecentComparator());
 
-        // THEN
         assertSame(tasks.get(0), task3);
         assertSame(tasks.get(1), task2);
         assertSame(tasks.get(2), task1);
     }
 
     @Test
-    public void should_have_task_in_good_order_after_old_comparator() {
-        // GIVEN
-        final TaskCellModelUi task1 = new TaskCellModelUi(1,"Projet Tartampion","task 1",123,0);
-        final TaskCellModelUi task2 = new TaskCellModelUi(2,"Projet Lucidia","task 2",124,1);
-        final TaskCellModelUi task3 = new TaskCellModelUi(3,"Projet Circus","task 3",125,2);
+    public void test_old_comparator() {
+        final TaskCellModelUi task1 = new TaskCellModelUi(1, 1, "aaa", 123);
+        final TaskCellModelUi task2 = new TaskCellModelUi(2, 2, "zzz", 124);
+        final TaskCellModelUi task3 = new TaskCellModelUi(3, 3, "hhh", 125);
 
         final ArrayList<TaskCellModelUi> tasks = new ArrayList<>();
         tasks.add(task1);
         tasks.add(task2);
         tasks.add(task3);
-
-        // WHEN
         Collections.sort(tasks, new TaskCellModelUi.TaskOldComparator());
 
-        // THEN
         assertSame(tasks.get(0), task1);
         assertSame(tasks.get(1), task2);
         assertSame(tasks.get(2), task3);
-    }
+    }*/
 }
