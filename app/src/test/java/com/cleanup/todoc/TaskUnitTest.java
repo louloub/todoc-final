@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.cleanup.todoc.data.model.Project;
 import com.cleanup.todoc.data.model.Task;
-import com.cleanup.todoc.data.repository.ProjectRepository;
-import com.cleanup.todoc.data.repository.TaskRepository;
+import com.cleanup.todoc.data.repository.ProjectRoomRepository;
+import com.cleanup.todoc.data.repository.TaskRoomRepository;
 import com.cleanup.todoc.model.TasksModelUi;
 import com.cleanup.todoc.ui.viewmodel.TaskViewModel;
 
@@ -19,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -38,10 +39,10 @@ public class TaskUnitTest {
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
     @Mock
-    private ProjectRepository projectRepository;
+    private ProjectRoomRepository projectRoomRepository;
 
     @Mock
-    private TaskRepository taskRepository;
+    private TaskRoomRepository taskRoomRepository;
 
     private TaskViewModel viewModel;
 
@@ -53,10 +54,10 @@ public class TaskUnitTest {
         projectsLiveData = new MutableLiveData<>();
         tasksLiveData = new MutableLiveData<>();
 
-        given(projectRepository.getProjectListLiveData()).willReturn(projectsLiveData);
-        given(taskRepository.getTaskListLiveData()).willReturn(tasksLiveData);
+        given(projectRoomRepository.getProjectListLiveData()).willReturn(projectsLiveData);
+        given(taskRoomRepository.getTaskListLiveData()).willReturn(tasksLiveData);
 
-        viewModel = new TaskViewModel(projectRepository, taskRepository);
+        viewModel = new TaskViewModel(projectRoomRepository, taskRoomRepository);
     }
 
     @Test
@@ -67,11 +68,11 @@ public class TaskUnitTest {
         projectsLiveData.setValue(projects);
 
         List<Task> tasks = new ArrayList<>();
-        tasks.add(new Task(0, "Nettoyer Android.support c naze"));
+        tasks.add(new Task(0, "Nettoyer Android.support c naze", new Date().getTime()));
         tasksLiveData.setValue(tasks);
 
         // When
-        TasksModelUi tasksModelUi = LiveDataTestUtils.getOrAwaitValue(viewModel.getTaskModelUiMediatorLiveData());
+        TasksModelUi tasksModelUi = LiveDataTestUtil.getOrAwaitValue(viewModel.getTaskModelUiMediatorLiveData());
 
         // Then
         assertFalse(tasksModelUi.isEmptyStateDisplayed());
