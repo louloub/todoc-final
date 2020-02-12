@@ -66,6 +66,27 @@ public class DataBaseTest {
         assertEquals(3, mCursor.getCount());
     }
 
+    // 2
+    @Test
+    public void should_two_task_are_in_db_after_add_three_task_and_delete_one(){
+        // GIVEN
+        ViewInteraction appCompatImageView = onView(
+                allOf(withId(R.id.img_delete),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.list_tasks),
+                                        0),
+                                1),
+                        isDisplayed()));
+        appCompatImageView.perform(click());
+
+        // WHEN
+        Cursor mCursor = mDatabase.query("SELECT * FROM Task",null);
+
+        // THEN
+        assertEquals(2, mCursor.getCount());
+    }
+
     private void createTask(String taskName) {
         // Click on "add tack button"
         ViewInteraction floatingActionButton = onView(
