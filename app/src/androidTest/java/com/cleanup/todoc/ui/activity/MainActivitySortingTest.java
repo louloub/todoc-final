@@ -1,8 +1,5 @@
 package com.cleanup.todoc.ui.activity;
 
-
-import android.support.test.espresso.DataInteraction;
-import android.support.test.espresso.ViewAssertion;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
@@ -11,9 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import androidx.test.espresso.Espresso;
-import androidx.test.espresso.action.ViewActions;
-import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.ViewMatchers;
 
 import com.cleanup.todoc.AndroidTestUtil;
@@ -22,31 +16,22 @@ import com.cleanup.todoc.R;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static com.cleanup.todoc.AndroidTestUtil.atPosition;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anything;
-import static org.hamcrest.Matchers.instanceOf;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.core.StringContains.containsString;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -55,13 +40,18 @@ public class MainActivitySortingTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
+    // TODO : IN CREATE TASK : HOW SELECT ANOTHER PROJECT IN SPINNER
+    // TODO : si pas possib:e : enlever le paramètre "project" de "createTask"
+
     // 1
     @Test
     public void should_two_task_are_display_after_add_three_task_and_delete_one_task(){
+        // GIVEN
         createTask("tache 1","Projet Tartampion");
         createTask("tache 2","Projet Lucidia");
         createTask("tache 3","Projet Circus");
 
+        // WHEN
         ViewInteraction appCompatImageView = onView(
                 allOf(withId(R.id.img_delete),
                         childAtPosition(
@@ -72,17 +62,17 @@ public class MainActivitySortingTest {
                         isDisplayed()));
         appCompatImageView.perform(click());
 
+        // THEN
         onView(withId(R.id.list_tasks)).check(new AndroidTestUtil.RecyclerViewItemCountAssertion(2));
     }
 
     // 2
     @Test
     public void should_task_are_good_sorting_with_old_comparator() {
-
+        // GIVEN
         createTask("tache 1","Projet Tartampion");
-        createTask("tache 2","Projet Lucidia");
-        createTask("tache 3","Projet Circus");
 
+        // WHEN
         // FILTER "A -> Z"
         ViewInteraction actionMenuItemView = onView(
                 allOf(withId(R.id.action_filter), withContentDescription("Filter"),
@@ -104,24 +94,21 @@ public class MainActivitySortingTest {
                         isDisplayed()));
         appCompatTextView.perform(click());
 
+        // THEN
         onView(ViewMatchers.withId(R.id.list_tasks))
-                .check(matches(atPosition(0, withText("tache 1"))));
+                .check(matches(atPosition(0, withText("tache 2"))));
 
         onView(ViewMatchers.withId(R.id.list_tasks))
-                .check(matches(atPosition(1, withText("tache 2"))));
+                .check(matches(atPosition(1, withText("tache 3"))));
 
         onView(ViewMatchers.withId(R.id.list_tasks))
-                .check(matches(atPosition(2, withText("tache 3"))));
+                .check(matches(atPosition(2, withText("tache 1"))));
     }
 
     // 3
     @Test
     public void should_task_are_good_sorting_with_a_z_comparator() {
-
-        createTask("tache 1","Projet Tartampion");
-        createTask("tache 2","Projet Lucidia");
-        createTask("tache 3","Projet Circus");
-
+        // WHEN
         // FILTER "A -> Z"
         ViewInteraction actionMenuItemView = onView(
                 allOf(withId(R.id.action_filter), withContentDescription("Filter"),
@@ -143,6 +130,7 @@ public class MainActivitySortingTest {
                         isDisplayed()));
         appCompatTextView.perform(click());
 
+        // THEN
         onView(ViewMatchers.withId(R.id.list_tasks))
                 .check(matches(atPosition(0, withText("tache 1"))));
 
@@ -156,10 +144,7 @@ public class MainActivitySortingTest {
     // 4
     @Test
     public void should_task_are_good_sorting_with_z_a_comparator() {
-        createTask("tache 1","Projet Tartampion");
-        createTask("tache 2","Projet Lucidia");
-        createTask("tache 3","Projet Circus");
-
+        // WHEN
         // FILTER "Z -> A"
         ViewInteraction actionMenuItemView = onView(
                 allOf(withId(R.id.action_filter), withContentDescription("Filter"),
@@ -181,6 +166,7 @@ public class MainActivitySortingTest {
                         isDisplayed()));
         appCompatTextView.perform(click());
 
+        // THEN
         onView(ViewMatchers.withId(R.id.list_tasks))
                 .check(matches(atPosition(0, withText("tache 3"))));
 
@@ -193,22 +179,8 @@ public class MainActivitySortingTest {
 
     // 5
     @Test
-    public void should_three_task_are_display_after_add_three_task(){
-        createTask("tache 1","Projet Tartampion");
-        createTask("tache 2","Projet Lucidia");
-        createTask("tache 3","Projet Circus");
-
-        onView(withId(R.id.list_tasks)).check(new AndroidTestUtil.RecyclerViewItemCountAssertion(3));
-    }
-
-    // 6
-    @Test
     public void should_task_are_good_sorting_with_recent_comparator() {
-
-        createTask("tache 1","Projet Tartampion");
-        createTask("tache 2","Projet Lucidia");
-        createTask("tache 3","Projet Circus");
-
+        // WHEN
         // FILTER "A -> Z"
         ViewInteraction actionMenuItemView = onView(
                 allOf(withId(R.id.action_filter), withContentDescription("Filter"),
@@ -230,14 +202,15 @@ public class MainActivitySortingTest {
                         isDisplayed()));
         appCompatTextView.perform(click());
 
+        // THEN
         onView(ViewMatchers.withId(R.id.list_tasks))
-                .check(matches(atPosition(0, withText("tache 3"))));
+                .check(matches(atPosition(0, withText("tache 1"))));
 
         onView(ViewMatchers.withId(R.id.list_tasks))
-                .check(matches(atPosition(1, withText("tache 2"))));
+                .check(matches(atPosition(1, withText("tache 3"))));
 
         onView(ViewMatchers.withId(R.id.list_tasks))
-                .check(matches(atPosition(2, withText("tache 1"))));
+                .check(matches(atPosition(2, withText("tache 2"))));
     }
 
     public void newMethod(){
@@ -355,6 +328,7 @@ public class MainActivitySortingTest {
     }
 
     private void createTask(String taskName, String project) {
+        // Click on "add tack button"
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.fab_add_task), withContentDescription("Ajouter une tâche"),
                         childAtPosition(
@@ -365,6 +339,7 @@ public class MainActivitySortingTest {
                         isDisplayed()));
         floatingActionButton.perform(click());
 
+        // Set task name
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.txt_task_name),
                         childAtPosition(
@@ -375,7 +350,38 @@ public class MainActivitySortingTest {
                         isDisplayed()));
         appCompatEditText.perform(replaceText(taskName), closeSoftKeyboard());
 
-        // TODO : use same code like sorting to select another project when create task
+        /*// Click on spinner
+        onView(withId(R.id.project_spinner)).perform(click());
+
+        onData(new TypeSafeMatcher<String>(project) {}).perform(click());
+
+        // Choose project in spinner list
+        *//*ViewInteraction actionMenuItemView = onView(
+                allOf(withId(R.id.project_spinner), withContentDescription(project),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.content),
+                                        1),
+                                0),
+                        isDisplayed()));
+        actionMenuItemView.perform(click());*//*
+
+        ViewInteraction appCompatSpinner = onView(
+                allOf(withId(R.id.project_spinner), withContentDescription(project),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.custom),
+                                        0),
+                                1),
+                        isDisplayed()));
+        appCompatSpinner.perform(click());
+
+        DataInteraction appCompatCheckedTextView = onData(anything())
+                .inAdapterView(childAtPosition(
+                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
+                        0))
+                .atPosition(1);
+        appCompatCheckedTextView.perform(click());*/
 
         //onView(withId(R.id.project_spinner)).perform(click());
 
