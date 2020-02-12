@@ -1,14 +1,14 @@
 package com.cleanup.todoc.ui.activity;
 
-import android.support.test.espresso.ViewInteraction;
-import android.support.test.filters.LargeTest;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+import androidx.test.rule.ActivityTestRule;
 
 import com.cleanup.todoc.AndroidTestUtil;
 import com.cleanup.todoc.R;
@@ -20,16 +20,16 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static android.support.test.espresso.action.ViewActions.replaceText;
-import static android.support.test.espresso.action.ViewActions.scrollTo;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.cleanup.todoc.AndroidTestUtil.atPosition;
 import static org.hamcrest.Matchers.allOf;
 
@@ -39,9 +39,6 @@ public class MainActivityTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
-
-    // TODO : IN CREATE TASK : HOW SELECT ANOTHER PROJECT IN SPINNER
-    // TODO : si pas possib:e : enlever le paramètre "project" de "createTask"
 
     // 1
     @Test
@@ -95,13 +92,13 @@ public class MainActivityTest {
         appCompatTextView.perform(click());
 
         // THEN
-        onView(ViewMatchers.withId(R.id.list_tasks))
+        onView(withId(R.id.list_tasks))
                 .check(matches(atPosition(0, withText("tache 2"))));
 
-        onView(ViewMatchers.withId(R.id.list_tasks))
+        onView(withId(R.id.list_tasks))
                 .check(matches(atPosition(1, withText("tache 3"))));
 
-        onView(ViewMatchers.withId(R.id.list_tasks))
+        onView(withId(R.id.list_tasks))
                 .check(matches(atPosition(2, withText("tache 1"))));
     }
 
@@ -131,13 +128,13 @@ public class MainActivityTest {
         appCompatTextView.perform(click());
 
         // THEN
-        onView(ViewMatchers.withId(R.id.list_tasks))
+        onView(withId(R.id.list_tasks))
                 .check(matches(atPosition(0, withText("tache 1"))));
 
-        onView(ViewMatchers.withId(R.id.list_tasks))
+        onView(withId(R.id.list_tasks))
                 .check(matches(atPosition(1, withText("tache 2"))));
 
-        onView(ViewMatchers.withId(R.id.list_tasks))
+        onView(withId(R.id.list_tasks))
                 .check(matches(atPosition(2, withText("tache 3"))));
     }
 
@@ -167,13 +164,13 @@ public class MainActivityTest {
         appCompatTextView.perform(click());
 
         // THEN
-        onView(ViewMatchers.withId(R.id.list_tasks))
+        onView(withId(R.id.list_tasks))
                 .check(matches(atPosition(0, withText("tache 3"))));
 
-        onView(ViewMatchers.withId(R.id.list_tasks))
+        onView(withId(R.id.list_tasks))
                 .check(matches(atPosition(1, withText("tache 2"))));
 
-        onView(ViewMatchers.withId(R.id.list_tasks))
+        onView(withId(R.id.list_tasks))
                 .check(matches(atPosition(2, withText("tache 1"))));
     }
 
@@ -203,13 +200,13 @@ public class MainActivityTest {
         appCompatTextView.perform(click());
 
         // THEN
-        onView(ViewMatchers.withId(R.id.list_tasks))
+        onView(withId(R.id.list_tasks))
                 .check(matches(atPosition(0, withText("tache 1"))));
 
-        onView(ViewMatchers.withId(R.id.list_tasks))
+        onView(withId(R.id.list_tasks))
                 .check(matches(atPosition(1, withText("tache 3"))));
 
-        onView(ViewMatchers.withId(R.id.list_tasks))
+        onView(withId(R.id.list_tasks))
                 .check(matches(atPosition(2, withText("tache 2"))));
     }
 
