@@ -22,6 +22,9 @@ android {
     lintOptions {
         disable 'RestrictedApi'
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
