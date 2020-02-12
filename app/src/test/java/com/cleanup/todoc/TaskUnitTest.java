@@ -1,5 +1,6 @@
 package com.cleanup.todoc;
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.MutableLiveData;
 
 import com.cleanup.todoc.data.model.Project;
@@ -10,6 +11,7 @@ import com.cleanup.todoc.model.TasksModelUi;
 import com.cleanup.todoc.ui.viewmodel.TaskViewModel;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -30,6 +32,9 @@ import static org.mockito.BDDMockito.given;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TaskUnitTest {
+
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
     @Mock
     private ProjectRepository projectRepository;

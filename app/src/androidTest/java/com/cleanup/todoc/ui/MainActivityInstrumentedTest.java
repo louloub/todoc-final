@@ -1,6 +1,6 @@
 package com.cleanup.todoc.ui;
 
-import android.support.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,7 +15,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.test.runner.AndroidJUnit4;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
