@@ -278,8 +278,8 @@ public class MainActivitySortingTest {
         appCompatButton.perform(scrollTo(), click());
     }
 
-    private static Matcher<View> childAtPosition(
-            final Matcher<View> parentMatcher, final int position) {
+    public static Matcher<View> childAtPosition(
+        final Matcher<View> parentMatcher, final int position) {
 
         return new TypeSafeMatcher<View>() {
             @Override
