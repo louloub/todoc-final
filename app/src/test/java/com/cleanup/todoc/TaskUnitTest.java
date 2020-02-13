@@ -1,12 +1,13 @@
 package com.cleanup.todoc;
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule;
-
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.MutableLiveData;
 
 import com.cleanup.todoc.data.model.Project;
 import com.cleanup.todoc.data.model.Task;
+import com.cleanup.todoc.data.repository.ProjectRepository;
 import com.cleanup.todoc.data.repository.ProjectRoomRepository;
+import com.cleanup.todoc.data.repository.TaskRepository;
 import com.cleanup.todoc.data.repository.TaskRoomRepository;
 import com.cleanup.todoc.model.TasksModelUi;
 import com.cleanup.todoc.ui.viewmodel.TaskViewModel;
@@ -26,6 +27,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 /**
  * Unit tests for tasks
@@ -39,10 +41,10 @@ public class TaskUnitTest {
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
     @Mock
-    private ProjectRoomRepository projectRoomRepository;
+    private ProjectRoomRepository projectRepository;
 
     @Mock
-    private TaskRoomRepository taskRoomRepository;
+    private TaskRoomRepository taskRepository;
 
     private TaskViewModel viewModel;
 
@@ -54,10 +56,12 @@ public class TaskUnitTest {
         projectsLiveData = new MutableLiveData<>();
         tasksLiveData = new MutableLiveData<>();
 
-        given(projectRoomRepository.getProjectListLiveData()).willReturn(projectsLiveData);
-        given(taskRoomRepository.getTaskListLiveData()).willReturn(tasksLiveData);
+        given(projectRepository.getProjectListLiveData()).willReturn(projectsLiveData);
+        given(taskRepository.getTaskListLiveData()).willReturn(tasksLiveData);
 
-        viewModel = new TaskViewModel(projectRoomRepository, taskRoomRepository);
+        // viewModel = mock(TaskViewModel.class);
+
+        viewModel = new TaskViewModel(projectRepository, taskRepository);
     }
 
     @Test
