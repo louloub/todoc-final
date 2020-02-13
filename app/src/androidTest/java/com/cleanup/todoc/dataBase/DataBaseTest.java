@@ -66,6 +66,7 @@ public class DataBaseTest {
         assertEquals(3, mCursor.getCount());
     }
 
+
     // 2
     @Test
     public void should_two_task_are_in_db_after_add_three_task_and_delete_one(){
