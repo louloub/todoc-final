@@ -6,7 +6,7 @@ import com.cleanup.todoc.data.model.Project;
 
 import java.util.List;
 
-public interface ProjectRepository {
+interface ProjectRepository {
 
     LiveData<List<Project>> getProjectListLiveData();
 

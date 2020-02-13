@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData;
 import com.cleanup.todoc.data.model.Project;
 import com.cleanup.todoc.data.model.Task;
 import com.cleanup.todoc.data.repository.ProjectRoomRepository;
-import com.cleanup.todoc.data.repository.TaskRepository;
 import com.cleanup.todoc.data.repository.TaskRoomRepository;
 import com.cleanup.todoc.model.TaskCellModelUi;
 import com.cleanup.todoc.model.TasksModelUi;
@@ -88,7 +87,7 @@ public class TaskUnitTest {
     }
 
     @Test
-    public void given_one_project_and_three_task_when_delete_one_task_then_two_task_are_exposed() throws InterruptedException {
+    public void given_one_project_and_three_task_when_delete_one_task_then_two_task_are_exposed() {
         // Given
         TaskCellModelUi taskCellModelUi1 = mock(TaskCellModelUi.class);
 
