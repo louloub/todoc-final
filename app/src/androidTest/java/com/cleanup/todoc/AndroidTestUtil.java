@@ -42,19 +42,6 @@ public class AndroidTestUtil {
                 assertThat(adapter.getItemCount(), is(expectedCount));
             }
         }
-
-        /*@Override
-        public void check(View view, android.support.test.espresso.NoMatchingViewException noViewFoundException) {
-            if (noViewFoundException != null) {
-                throw noViewFoundException;
-            }
-
-            RecyclerView recyclerView = (RecyclerView) view;
-            RecyclerView.Adapter adapter = recyclerView.getAdapter();
-            if (adapter != null) {
-                assertThat(adapter.getItemCount(), is(expectedCount));
-            }
-        }*/
     }
 
     public static class MyRecyclerViewFinder {
