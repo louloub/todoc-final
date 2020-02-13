@@ -143,7 +143,9 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             taskName = mDialogEditText.getText().toString();
         }
 
-        alertDialog.dismiss();
+        if (!taskName.equals("")){
+            alertDialog.dismiss();
+        }
 
         mTaskViewModel.addNewTask(taskName,taskProject);
     }

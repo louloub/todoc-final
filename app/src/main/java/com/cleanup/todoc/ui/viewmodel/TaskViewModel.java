@@ -104,53 +104,64 @@ public class TaskViewModel extends ViewModel {
         @Nullable Boolean isTaskNameEmpty
     ) {
         List<TaskCellModelUi> taskCellModels = new ArrayList<>();
-        boolean isEmptyStateDisplayed;
+        boolean isEmptyStateDisplayed = false;
         @StringRes
         int emptyTaskNameErrorStringRes = 0;
 
-        if (projectList == null || taskList == null) {
-            return new TasksModelUi(taskCellModels, true, emptyTaskNameErrorStringRes);
-        }
+        if (isTaskNameEmpty != null && isTaskNameEmpty) {
+            emptyTaskNameErrorStringRes = R.string.empty_task_name;
+        } else {
 
-        for (Task task : taskList) {
-            for (Project project : projectList) {
-                if (project.getId() == task.getProjectId()) {
+            if (projectList == null || taskList == null) {
+                return new TasksModelUi(taskCellModels, true, emptyTaskNameErrorStringRes);
+            }
 
-                    int colorProject = getColorProject(project);
+            for (Task task : taskList) {
+                for (Project project : projectList) {
+                    if (project.getId() == task.getProjectId()) {
 
-                    taskCellModels.add(
+                        int colorProject = getColorProject(project);
+
+                        taskCellModels.add(
                             new TaskCellModelUi(
-                                    task.getId(),
-                                    project.getName(),
-                                    task.getMessage(),
-                                    task.getCreationTimestamp(),
-                                    colorProject)
-                            );
+                                task.getId(),
+                                project.getName(),
+                                task.getMessage(),
+                                task.getCreationTimestamp(),
+                                colorProject)
+                        );
+                    }
                 }
             }
+
+            isEmptyStateDisplayed = taskList.size() == 0;
+
+            if (sortMethod == null) {
+                sortMethod = ALPHABETICAL;
+            }
+
+            switch (sortMethod) {
+                case ALPHABETICAL:
+                    Collections.sort(taskCellModels, new TaskCellModelUi.TaskAZComparator());
+                    break;
+                case ALPHABETICAL_INVERTED:
+                    Collections.sort(taskCellModels, new TaskCellModelUi.TaskZAComparator());
+                    break;
+                case RECENT_FIRST:
+                    Collections.sort(taskCellModels, new TaskCellModelUi.TaskRecentComparator());
+                    break;
+                case OLD_FIRST:
+                    Collections.sort(taskCellModels, new TaskCellModelUi.TaskOldComparator());
+                    break;
+            }
+
+
+            return new TasksModelUi(
+                taskCellModels,
+                isEmptyStateDisplayed,
+                emptyTaskNameErrorStringRes
+            );
         }
-
-        isEmptyStateDisplayed = taskList.size() == 0;
-
-        if (sortMethod == null) {
-            sortMethod = ALPHABETICAL;
-        }
-
-        switch (sortMethod) {
-            case ALPHABETICAL:
-                Collections.sort(taskCellModels, new TaskCellModelUi.TaskAZComparator());
-                break;
-            case ALPHABETICAL_INVERTED:
-                Collections.sort(taskCellModels, new TaskCellModelUi.TaskZAComparator());
-                break;
-            case RECENT_FIRST:
-                Collections.sort(taskCellModels, new TaskCellModelUi.TaskRecentComparator());
-                break;
-            case OLD_FIRST:
-                Collections.sort(taskCellModels, new TaskCellModelUi.TaskOldComparator());
-                break;
-        }
-
         return new TasksModelUi(
             taskCellModels,
             isEmptyStateDisplayed,
@@ -173,6 +184,7 @@ public class TaskViewModel extends ViewModel {
         }
         return colorProject;
     }
+
 
     public void addNewTask(@NonNull String taskName, @Nullable ProjectModelUi projectModelUi) {
         // If a name has not been set
