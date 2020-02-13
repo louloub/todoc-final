@@ -12,7 +12,6 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cleanup.todoc.R;
-import com.cleanup.todoc.model.ProjectModelUi;
 import com.cleanup.todoc.model.TaskCellModelUi;
 
 import java.util.List;
@@ -145,17 +144,8 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
         void bind(TaskCellModelUi task) {
             lblTaskName.setText(task.getName());
             imgDelete.setTag(task);
-
-            // TODO LOULOUB A VIRER
-            final ProjectModelUi taskProject = task.getProject();
-            if (taskProject != null) {
-                imgProject.setSupportImageTintList(ColorStateList.valueOf(taskProject.getColor()));
-                lblProjectName.setText(taskProject.getName());
-            } else {
-                imgProject.setVisibility(View.INVISIBLE);
-                lblProjectName.setText("");
-            }
-
+            lblProjectName.setText(task.getProjectName());
+            imgProject.setSupportImageTintList(ColorStateList.valueOf(task.getColor()));
         }
     }
 }

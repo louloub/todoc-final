@@ -1,7 +1,6 @@
 package com.cleanup.todoc.data.model;
 
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -26,9 +25,5 @@ public class Project {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

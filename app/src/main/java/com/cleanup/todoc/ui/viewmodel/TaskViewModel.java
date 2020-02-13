@@ -3,16 +3,18 @@ package com.cleanup.todoc.ui.viewmodel;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
+import com.cleanup.todoc.MainApplication;
 import com.cleanup.todoc.R;
 import com.cleanup.todoc.data.model.Project;
 import com.cleanup.todoc.data.model.Task;
-import com.cleanup.todoc.data.repository.ProjectRepository;
+import com.cleanup.todoc.data.repository.ProjectRoomRepository;
 import com.cleanup.todoc.data.repository.TaskRepository;
 import com.cleanup.todoc.model.ProjectModelUi;
 import com.cleanup.todoc.model.TaskCellModelUi;
@@ -20,24 +22,25 @@ import com.cleanup.todoc.model.TasksModelUi;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import static com.cleanup.todoc.ui.viewmodel.SortMethod.ALPHABETICAL;
 
 public class TaskViewModel extends ViewModel {
 
-    private ProjectRepository mProjectRoomRepository;
-    private TaskRepository mTaskRepository;
+    private final ProjectRoomRepository mProjectRoomRepository;
+    private final TaskRepository mTaskRepository;
 
-    private MediatorLiveData<TasksModelUi> mTaskModelUiMediatorLiveData = new MediatorLiveData<>();
-    private MutableLiveData<SortMethod> mSortMethodLiveData = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mIsTaskNameEmpty = new MutableLiveData<>();
+    private final MediatorLiveData<TasksModelUi> mTaskModelUiMediatorLiveData = new MediatorLiveData<>();
+    private final MutableLiveData<SortMethod> mSortMethodLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mIsTaskNameEmpty = new MutableLiveData<>();
 
     public LiveData<TasksModelUi> getTaskModelUiMediatorLiveData() {
         return mTaskModelUiMediatorLiveData;
     }
 
-    public TaskViewModel(ProjectRepository projectRoomRepository, final TaskRepository taskRepository) {
+    public TaskViewModel(ProjectRoomRepository projectRoomRepository, final TaskRepository taskRepository) {
         this.mProjectRoomRepository = projectRoomRepository;
         this.mTaskRepository = taskRepository;
 
@@ -101,55 +104,87 @@ public class TaskViewModel extends ViewModel {
         @Nullable Boolean isTaskNameEmpty
     ) {
         List<TaskCellModelUi> taskCellModels = new ArrayList<>();
-        boolean isEmptyStateDisplayed;
+        boolean isEmptyStateDisplayed = false;
         @StringRes
         int emptyTaskNameErrorStringRes = 0;
 
-        if (projectList == null || taskList == null) {
-            return new TasksModelUi(taskCellModels, true, emptyTaskNameErrorStringRes);
-        }
-
-        for (Task task : taskList) {
-            for (Project project : projectList) {
-                if (project.getId() == task.getProjectId()) {
-                    // TODO LOULOUB UTILISER LE roject.getId() POUR METTRE LA COULEUR
-
-                    taskCellModels.add(new TaskCellModelUi(task.getId(), project.getId(), task.getMessage(), 0));
-                }
-            }
-        }
-
-        isEmptyStateDisplayed = taskList.size() == 0;
-
         if (isTaskNameEmpty != null && isTaskNameEmpty) {
             emptyTaskNameErrorStringRes = R.string.empty_task_name;
-        }
+        } else {
 
-        if (sortMethod == null) {
-            sortMethod = ALPHABETICAL;
-        }
+            if (projectList == null || taskList == null) {
+                return new TasksModelUi(taskCellModels, true, emptyTaskNameErrorStringRes);
+            }
 
-        switch (sortMethod) {
-            case ALPHABETICAL:
-                Collections.sort(taskCellModels, new TaskCellModelUi.TaskAZComparator());
-                break;
-            case ALPHABETICAL_INVERTED:
-                Collections.sort(taskCellModels, new TaskCellModelUi.TaskZAComparator());
-                break;
-            case RECENT_FIRST:
-                Collections.sort(taskCellModels, new TaskCellModelUi.TaskRecentComparator());
-                break;
-            case OLD_FIRST:
-                Collections.sort(taskCellModels, new TaskCellModelUi.TaskOldComparator());
-                break;
-        }
+            for (Task task : taskList) {
+                for (Project project : projectList) {
+                    if (project.getId() == task.getProjectId()) {
 
+                        int colorProject = getColorProject(project);
+
+                        taskCellModels.add(
+                            new TaskCellModelUi(
+                                task.getId(),
+                                project.getName(),
+                                task.getMessage(),
+                                task.getCreationTimestamp(),
+                                colorProject)
+                        );
+                    }
+                }
+            }
+
+            isEmptyStateDisplayed = taskList.size() == 0;
+
+            if (sortMethod == null) {
+                sortMethod = ALPHABETICAL;
+            }
+
+            switch (sortMethod) {
+                case ALPHABETICAL:
+                    Collections.sort(taskCellModels, new TaskCellModelUi.TaskAZComparator());
+                    break;
+                case ALPHABETICAL_INVERTED:
+                    Collections.sort(taskCellModels, new TaskCellModelUi.TaskZAComparator());
+                    break;
+                case RECENT_FIRST:
+                    Collections.sort(taskCellModels, new TaskCellModelUi.TaskRecentComparator());
+                    break;
+                case OLD_FIRST:
+                    Collections.sort(taskCellModels, new TaskCellModelUi.TaskOldComparator());
+                    break;
+            }
+
+
+            return new TasksModelUi(
+                taskCellModels,
+                isEmptyStateDisplayed,
+                emptyTaskNameErrorStringRes
+            );
+        }
         return new TasksModelUi(
             taskCellModels,
             isEmptyStateDisplayed,
             emptyTaskNameErrorStringRes
         );
     }
+
+    private int getColorProject(Project project) {
+        int colorProject = 0;
+        switch (project.getName()){
+            case "Projet Tartampion" :
+                colorProject = ContextCompat.getColor(MainApplication.getInstance(), R.color.project_tartampion);
+                break;
+            case "Projet Lucidia" :
+                colorProject = ContextCompat.getColor(MainApplication.getInstance(), R.color.project_lucidia);
+                break;
+            case "Projet Circus" :
+                colorProject = ContextCompat.getColor(MainApplication.getInstance(), R.color.project_circus);
+                break;
+        }
+        return colorProject;
+    }
+
 
     public void addNewTask(@NonNull String taskName, @Nullable ProjectModelUi projectModelUi) {
         // If a name has not been set
@@ -165,7 +200,7 @@ public class TaskViewModel extends ViewModel {
 
             Task task = new Task(
                 projectModelUi.getId(),
-                taskName
+                taskName, new Date().getTime()
             );
 
             mTaskRepository.addTask(task);

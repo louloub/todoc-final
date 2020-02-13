@@ -4,10 +4,8 @@ import androidx.annotation.NonNull;
     import androidx.lifecycle.ViewModel;
     import androidx.lifecycle.ViewModelProvider;
 
-    import com.cleanup.todoc.data.repository.ProjectRepositoryImpl;
-    import com.cleanup.todoc.data.repository.ProjectRoomRepository;
-    import com.cleanup.todoc.data.repository.TaskRepositoryImpl;
-    import com.cleanup.todoc.data.repository.TaskRoomRepository;
+import com.cleanup.todoc.data.repository.ProjectRoomRepository;
+import com.cleanup.todoc.data.repository.TaskRoomRepository;
     import com.cleanup.todoc.ui.viewmodel.TaskViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {

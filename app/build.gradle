@@ -12,8 +12,11 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
         }
     }
     lintOptions {
@@ -25,28 +28,37 @@ android {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.1.0-beta02'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'com.google.android.material:material:1.2.0-alpha04'
 
     // Room
-    def room_version = "2.1.0"
+    def room_version = "2.2.3"
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
+    // UNIT TEST
+    testImplementation 'org.mockito:mockito-core:3.2.4'
     testImplementation 'junit:junit:4.12'
-    // Helps testing livedata : InstantTaskExecutorRule, for example
-    testImplementation 'androidx.arch.core:core-testing:2.0.0'
-    // Helps mocking objects (Mockito.mock() or Mockito.spy())
-    testImplementation "org.mockito:mockito-core:3.2.0"
-    // Helps asserting (lists for example)
-    testImplementation 'org.hamcrest:hamcrest-library:1.3'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    testImplementation 'org.hamcrest:java-hamcrest:2.0.0.0'
+    androidTestImplementation 'android.arch.core:core-testing:1.1.1'
+    // testImplementation "android.arch.core:core-testing:1.1.1"
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
 
     // INSTRUMENTATION TEST
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+
+    // ANDROID X
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
 }

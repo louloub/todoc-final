@@ -35,4 +35,5 @@ public class TasksModelUi {
     public int getEmptyTaskNameErrorStringRes() {
         return emptyTaskNameErrorStringRes;
     }
+
 }

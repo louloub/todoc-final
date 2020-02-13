@@ -31,7 +31,6 @@ public class AndroidTestUtil {
             this.expectedCount = expectedCount;
         }
 
-        @Override
         public void check(View view, NoMatchingViewException noViewFoundException) {
             if (noViewFoundException != null) {
                 throw noViewFoundException;
@@ -45,7 +44,7 @@ public class AndroidTestUtil {
         }
     }
 
-    public static class MyRecyclerViewFinder {
+    private static class MyRecyclerViewFinder {
 
         public static ViewAction clickChildViewWithId(@IdRes final int id) {
             return new ViewAction() {
@@ -66,13 +65,6 @@ public class AndroidTestUtil {
                 }
             };
         }
-    }
-
-    public static <VH extends RecyclerView.ViewHolder> ViewAction actionOnItemViewAtPosition(int position,
-                                                                                             @IdRes
-                                                                                                     int viewId,
-                                                                                             ViewAction viewAction) {
-        return new ActionOnItemViewAtPositionViewAction(position, viewId, viewAction);
     }
 
     private static final class ActionOnItemViewAtPositionViewAction<VH extends RecyclerView

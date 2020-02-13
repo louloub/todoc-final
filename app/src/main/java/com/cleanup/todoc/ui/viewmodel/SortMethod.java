@@ -20,5 +20,4 @@ public enum SortMethod {
     /**
      * No sort
      */
-    NONE
 }

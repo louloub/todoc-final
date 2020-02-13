@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cleanup.todoc.MainApplication;
 import com.cleanup.todoc.R;
 import com.cleanup.todoc.ViewModelFactory;
 import com.cleanup.todoc.model.ProjectModelUi;
@@ -37,14 +38,14 @@ import com.cleanup.todoc.ui.viewmodel.TaskViewModel;
  */
 public class MainActivity extends AppCompatActivity implements TasksAdapter.DeleteTaskListener {
 
-    TaskViewModel mTaskViewModel;
+    private TaskViewModel mTaskViewModel;
 
-    private final ProjectModelUi[] mAllProjects = ProjectModelUi.getAllProjects();
+    private final ProjectModelUi[] mAllProjects = MainApplication.getAllProjects();
 
     private final TasksAdapter mTaskAdapter = new TasksAdapter(this);
 
     @Nullable
-    public AlertDialog mAlertDialog = null;
+    private AlertDialog mAlertDialog = null;
 
     @Nullable
     private EditText mDialogEditText = null;
@@ -62,7 +63,10 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         RecyclerView recyclerView = findViewById(R.id.list_tasks);
         final TextView textViewNoTask = findViewById(R.id.lbl_no_task);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(
+                this,
+                LinearLayoutManager.VERTICAL,
+                false));
         recyclerView.setAdapter(mTaskAdapter);
 
         findViewById(R.id.fab_add_task).setOnClickListener(new View.OnClickListener() {
@@ -72,7 +76,9 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             }
         });
 
-        mTaskViewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(TaskViewModel.class);
+        mTaskViewModel = new ViewModelProvider(
+                this,
+                ViewModelFactory.getInstance()).get(TaskViewModel.class);
 
         mTaskViewModel.getTaskModelUiMediatorLiveData().observe(this, new Observer<TasksModelUi>() {
             @Override
@@ -137,7 +143,9 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             taskName = mDialogEditText.getText().toString();
         }
 
-        alertDialog.dismiss();
+        if (!taskName.equals("")){
+            alertDialog.dismiss();
+        }
 
         mTaskViewModel.addNewTask(taskName,taskProject);
     }
@@ -192,7 +200,10 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     }
 
     private void populateDialogSpinner() {
-        final ArrayAdapter<ProjectModelUi> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mAllProjects);
+        final ArrayAdapter<ProjectModelUi> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                mAllProjects);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         if (mDialogSpinner != null) {
             mDialogSpinner.setAdapter(adapter);

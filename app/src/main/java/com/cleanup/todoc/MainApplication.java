@@ -1,10 +1,12 @@
 package com.cleanup.todoc;
 
 import android.app.Application;
+import android.database.Cursor;
 
 import com.cleanup.todoc.data.dao.ProjectDao;
 import com.cleanup.todoc.data.dataBase.AppDatabase;
 import com.cleanup.todoc.data.model.Project;
+import com.cleanup.todoc.model.ProjectModelUi;
 
 public class MainApplication extends Application {
 
@@ -22,10 +24,30 @@ public class MainApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        ProjectDao projectDao = AppDatabase.getInstance().projectDao();
+        createProjectOnDataBase();
+    }
 
-        projectDao.insertProject(new Project("Projet Tartampion"));
-        projectDao.insertProject(new Project("Projet Lucidia"));
-        projectDao.insertProject(new Project("Projet Circus"));
+    public static ProjectModelUi[] getAllProjects() {
+        return new ProjectModelUi[]{
+                new ProjectModelUi(1, "Projet Tartampion"),
+                new ProjectModelUi(2, "Projet Lucidia"),
+                new ProjectModelUi(3, "Projet Circus"),
+        };
+    }
+
+    private void createProjectOnDataBase(){
+
+        AppDatabase database = AppDatabase.getInstance();
+
+        Cursor mCursor = database.query("SELECT * FROM Project",null);
+
+        if (!mCursor.moveToFirst())
+        {
+            ProjectDao projectDao = database.projectDao();
+
+            projectDao.insertProject(new Project("Projet Tartampion"));
+            projectDao.insertProject(new Project("Projet Lucidia"));
+            projectDao.insertProject(new Project("Projet Circus"));
+        }
     }
 }
