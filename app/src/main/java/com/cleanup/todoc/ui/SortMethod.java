@@ -1,4 +1,4 @@
-package com.cleanup.todoc.ui.viewmodel;
+package com.cleanup.todoc.ui;
 
 public enum SortMethod {
     /**

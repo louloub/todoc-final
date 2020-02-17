@@ -9,7 +9,7 @@ import com.cleanup.todoc.data.repository.ProjectRoomRepository;
 import com.cleanup.todoc.data.repository.TaskRoomRepository;
 import com.cleanup.todoc.model.TaskCellModelUi;
 import com.cleanup.todoc.model.TasksModelUi;
-import com.cleanup.todoc.ui.viewmodel.SortMethod;
+import com.cleanup.todoc.ui.SortMethod;
 import com.cleanup.todoc.ui.viewmodel.TaskViewModel;
 
 import org.junit.Before;

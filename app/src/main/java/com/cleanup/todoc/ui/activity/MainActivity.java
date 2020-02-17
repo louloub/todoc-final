@@ -27,7 +27,7 @@ import com.cleanup.todoc.model.ProjectModelUi;
 import com.cleanup.todoc.model.TaskCellModelUi;
 import com.cleanup.todoc.model.TasksModelUi;
 import com.cleanup.todoc.ui.adapter.TasksAdapter;
-import com.cleanup.todoc.ui.viewmodel.SortMethod;
+import com.cleanup.todoc.ui.SortMethod;
 import com.cleanup.todoc.ui.viewmodel.TaskViewModel;
 
 /**

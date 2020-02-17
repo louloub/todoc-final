@@ -19,13 +19,14 @@ import com.cleanup.todoc.data.repository.TaskRepository;
 import com.cleanup.todoc.model.ProjectModelUi;
 import com.cleanup.todoc.model.TaskCellModelUi;
 import com.cleanup.todoc.model.TasksModelUi;
+import com.cleanup.todoc.ui.SortMethod;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import static com.cleanup.todoc.ui.viewmodel.SortMethod.ALPHABETICAL;
+import static com.cleanup.todoc.ui.SortMethod.ALPHABETICAL;
 
 public class TaskViewModel extends ViewModel {
 
